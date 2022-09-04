@@ -1,6 +1,68 @@
 # Release Notes for 9.x
 
-## [Unreleased](https://github.com/laravel/framework/compare/v9.24.0...9.x)
+## [Unreleased](https://github.com/laravel/framework/compare/v9.26.1...9.x)
+
+
+## [v9.26.1](https://github.com/laravel/framework/compare/v9.26.0...v9.26.1) - 2022-08-23
+
+### Revert
+- Revert "[9.x] Add statusText for an assertion message" ([#43831](https://github.com/laravel/framework/pull/43831))
+
+### Fixed
+- Fixed `withoutVite` ([#43826](https://github.com/laravel/framework/pull/43826))
+
+
+## [v9.26.0](https://github.com/laravel/framework/compare/v9.25.1...v9.26.0) - 2022-08-23
+
+### Added
+- Adding support for non-backed enums in Models ([#43728](https://github.com/laravel/framework/pull/43728))
+- Added vite asset url helpers ([#43702](https://github.com/laravel/framework/pull/43702))
+- Added Authentication keyword for SqlServerConnector.php ([#43757](https://github.com/laravel/framework/pull/43757))
+- Added support for additional where* methods to route groups ([#43731](https://github.com/laravel/framework/pull/43731))
+- Added min_digits and max_digits validation ([#43797](https://github.com/laravel/framework/pull/43797))
+- Added closure support to dispatch conditionals in bus ([#43784](https://github.com/laravel/framework/pull/43784))
+- Added configurable paths to Vite ([#43620](https://github.com/laravel/framework/pull/43620))
+
+### Fixed
+- Fix unique lock release for broadcast events ([#43738](https://github.com/laravel/framework/pull/43738))
+- Fix empty collection class serialization ([#43758](https://github.com/laravel/framework/pull/43758))
+- Fixes creation of deprecations channel ([#43812](https://github.com/laravel/framework/pull/43812))
+
+### Changed
+- Improve display of failures for assertDatabaseHas ([#43736](https://github.com/laravel/framework/pull/43736))
+- Always use the write PDO connection to read the just stored pending batch in bus ([#43737](https://github.com/laravel/framework/pull/43737))
+- Move unique lock release to method ([#43740](https://github.com/laravel/framework/pull/43740))
+- Remove timeoutAt fallback from Job base class ([#43749](https://github.com/laravel/framework/pull/43749))
+- Convert closures to arrow functions ([#43778](https://github.com/laravel/framework/pull/43778))
+- Use except also in `Illuminate/Routing/Middleware/ValidateSignature::handle()` ([e554d47](https://github.com/laravel/framework/commit/e554d471daab568877c039e955a01cb2f06a2e7b))
+- Adjust forever time for cookies ([#43806](https://github.com/laravel/framework/pull/43806))
+- Make string padding UTF-8 safe ([f1762ed](https://github.com/laravel/framework/commit/f1762ed1660f2a71189f1a32efe5b410ec428268))
+
+
+## [v9.25.1](https://github.com/laravel/framework/compare/v9.25.0...v9.25.1) - 2022-08-16
+
+### Fixes
+- [Fixed typos](https://github.com/laravel/framework/compare/v9.25.0...v9.25.1) 
+
+
+## [v9.25.0](https://github.com/laravel/framework/compare/v9.24.0...v9.25.0) - 2022-08-16
+
+### Added
+- Added whenNotExactly to Stringable ([#43700](https://github.com/laravel/framework/pull/43700))
+- Added ability to Model::query()->touch() to mass update timestamps ([#43665](https://github.com/laravel/framework/pull/43665))
+
+### Fixed
+- Prevent error in db/model commands when using unsupported columns ([#43635](https://github.com/laravel/framework/pull/43635))
+- Fixes ensureDependenciesExist runtime error ([#43626](https://github.com/laravel/framework/pull/43626))
+- Null value for auto-cast field caused deprication warning in php 8.1 ([#43706](https://github.com/laravel/framework/pull/43706))
+- db:table command properly handle table who doesn't exist ([#43669](https://github.com/laravel/framework/pull/43669))
+
+### Changed
+- Handle assoc mode within db commands ([#43636](https://github.com/laravel/framework/pull/43636))
+- Allow chunkById on Arrays, as well as Models ([#43666](https://github.com/laravel/framework/pull/43666))
+- Allow for int value parameters to whereMonth() and whereDay() ([#43668](https://github.com/laravel/framework/pull/43668))
+- Cleaning up old if-else statement ([#43712](https://github.com/laravel/framework/pull/43712))
+- Ensure correct 'integrity' value is used for css assets ([#43714](https://github.com/laravel/framework/pull/43714))
 
 
 ## [v9.24.0](https://github.com/laravel/framework/compare/v9.23.0...v9.24.0) - 2022-08-09

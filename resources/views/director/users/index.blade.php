@@ -9,6 +9,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Balance</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -18,6 +19,7 @@
                             <td class="align-middle">{{$user->name}}</td>
                             <td class="align-middle">{{$user->email}}</td>
                             <td class="align-middle">{{$user->role}}</td>
+                            <td class="align-middle">$ {{$user->balance=='' ? '0' : $user->balance}}</td>
                             <td class="align-middle">
                                     <a href="{{route('users.edit', [$user->id])}}"><i class="fa fa-edit fs-4"></i></a>
                                         <a href="{{route('users_destroy', [$user->id])}}"><i class="fa fa-trash text-danger fs-4"></i></a>

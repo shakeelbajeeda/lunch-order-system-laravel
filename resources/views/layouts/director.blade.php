@@ -37,6 +37,7 @@
                         <li class="mt-2"><a href="{{route('shops.index')}}" class="text-decoration-none text-dark fs-5" >Shop List</a></li>
                         <li class="mt-2"><a href="{{route('shopStaff.create')}}" class="text-decoration-none text-dark fs-5" >Add Shop Staff</a></li>
                         <li class="mt-2"><a href="{{route('shopStaff.index')}}" class="text-decoration-none text-dark fs-5" >View All Shop Staff</a></li>
+                        <li class="mt-2"><a href="{{route('depositPayments')}}" class="text-decoration-none text-dark fs-5" >Deposit Payments</a></li>
                     </ul>
                 </div>
             </div>

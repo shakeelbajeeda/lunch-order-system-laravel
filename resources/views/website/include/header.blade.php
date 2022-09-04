@@ -21,11 +21,18 @@
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item"><a class="nav-link text-dark active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="menu.html">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{route('products.index')}}">Master Food & Beverage </a></li>
                     @if(auth()->check())
                     @if(auth()->user()->role == 'director')
-                    <li class="nav-item"><a href="" class="nav-link text-dark">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{route('products.index')}}">Master Food & Beverage </a></li>
+                    @endif
+                    @if(auth()->user()->role == 'manager' || auth()->user()->role == 'shop staff')
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{route('products.index')}}">Master Food & Beverage </a></li>
+                    @endif
+                    @if(auth()->user()->role == 'director')
+                    <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link text-dark">Dashboard</a></li>
                     @elseif(auth()->user()->role == 'user')
+                        <li class="nav-item"><a href="" class="nav-link text-dark">Dashboard</a></li>
+                        @elseif(auth()->user()->role == 'manager' || auth()->user()->role == 'shop staff')
                         <li class="nav-item"><a href="" class="nav-link text-dark">Dashboard</a></li>
                     @endif
                     <div class="float-end">
