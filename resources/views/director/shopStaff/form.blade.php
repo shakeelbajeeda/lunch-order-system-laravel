@@ -1,6 +1,16 @@
 @extends('layouts.director')
 @section('content')
     <div class="col-md-9">
+        <div class="mt-2">
+            <div class="text-center">
+                @if(session()->has('message'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Error!</strong> {{session()->get('message')}}
+                    </div>
+                @endif
+            </div>
+        </div>
         <form action="{{@$shopWorker ? route('shopStaff.update',[@$shopWorker->id]) : route('shopStaff.store')}}"
             method="post">
             @csrf
@@ -43,6 +53,7 @@
             </div>
             <div class="col-12 mt-3">
                 <div class="float-end">
+                    <a href="{{route('shopStaff.index')}}" class="btn btn-secondary rounded-pill">Cancel</a>
                     <button type="submit" class="btn-style rounded-pill"><i
                             class="{{@$shopWorker ? 'fa fa-clock-o' : 'fa fa-plus'}} me-2"></i>{{@$shopWorker ? 'Update' : 'Add' }}
                     </button>

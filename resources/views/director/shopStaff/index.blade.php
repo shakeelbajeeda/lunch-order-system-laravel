@@ -1,7 +1,10 @@
 @extends('layouts.director')
 @section('content')
     <div class="col-md-9">
-        <div class="table-responsive">
+        <div>
+            <a href="{{route('shopStaff.create')}}" class="btn btn-primary">Add New Staff</a>
+        </div>
+        <div class="table-responsive mt-2">
             <table class="table table-hover">
                 <thead>
                 <tr>

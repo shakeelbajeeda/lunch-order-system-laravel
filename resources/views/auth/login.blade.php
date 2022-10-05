@@ -29,13 +29,6 @@
                     <div class="text-center mt-4">
                         <button type="submit" class="border-0 btn-style rounded-pill px-5"><i class="fa fa-lock me-2"></i> Login</button>
                     </div>
-                    @if (Route::has('password.request'))
-                    <div class="text-center py-3">
-                        <a class="clr" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    </div>
-                    @endif
                 </form>
                 <div class="row mt-4">
                     <div class="col-6">

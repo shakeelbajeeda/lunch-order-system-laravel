@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
+use App\Models\ShopProduct;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('director.index');
+        $data['shops'] = Shop::all();
+        return view('website.index')->with($data);
+    }
+
+    public function getShopProducts($id){
+        $data['shop'] = Shop::where('id', $id)->with('products')->first();
+        return view('website.menu')->with($data);
     }
 }

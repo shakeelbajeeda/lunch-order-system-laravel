@@ -50,17 +50,11 @@ a.active {
     text-overflow: ellipsis;
     color: #bdb8b8;
   }
-  .shop-cards .shop-img {
-    width: 60px;
-    margin-bottom: 15px;
-  }
-
-  .shop-cards a h4 {
-    font-size: 16px;
-    transition: 0.3s;
-    font-family: "Rubik", sans-serif;
-    font-weight: 500;
-  }
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
   .shop-cards a:hover {
     transform: translate3d(0, -5px, 0);

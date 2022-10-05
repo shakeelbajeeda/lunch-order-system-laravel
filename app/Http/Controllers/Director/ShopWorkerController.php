@@ -8,14 +8,13 @@ use App\Http\Requests\UpdateShopWorkerRequest;
 use App\Models\Shop;
 use App\Models\ShopWorker;
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
 
 class ShopWorkerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -26,7 +25,7 @@ class ShopWorkerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -38,13 +37,18 @@ class ShopWorkerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreShopWorkerRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreShopWorkerRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreShopWorkerRequest $request)
     {
-        ShopWorker::create($request->all());
-        return redirect()->route('shopStaff.index');
+        $isUserExist = ShopWorker::where('user_id', $request->user_id)->first();
+        if($isUserExist){
+            return redirect()->back()->with('message', 'This user is already working on another shop.Please select other one');
+        }else{
+            ShopWorker::create($request->all());
+            return redirect()->route('shopStaff.index');
+        }
     }
 
     /**
@@ -61,8 +65,8 @@ class ShopWorkerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ShopWorker  $shopWorker
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -76,9 +80,9 @@ class ShopWorkerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateShopWorkerRequest  $request
-     * @param  \App\Models\ShopWorker  $shopWorker
-     * @return \Illuminate\Http\Response
+     * @param UpdateShopWorkerRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateShopWorkerRequest $request, $id)
     {
@@ -90,8 +94,8 @@ class ShopWorkerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ShopWorker  $shopWorker
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

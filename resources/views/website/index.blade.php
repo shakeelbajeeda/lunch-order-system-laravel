@@ -17,106 +17,15 @@
         </div>
         <div class="container mt-4">
             <div class="row justify-content-center">
+                @foreach($shops as $shop)
                 <div class="col-md-3 col-lg-3 col-6">
-                    <div>
                         <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/1.png" alt="">
-                                <h4>Fico</h4>
+                            <a href="{{route('shopProducts',[$shop->id])}}" class="text-decoration-none text-dark">
+                                <h3>{{$shop->name}}</h3>
                             </a>
                         </div>
-                    </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/2.png" alt="">
-                                <h4>Peacock and Jones</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/3.png" alt="">
-                                <h4>Mudbar Restaurant</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/4.png" alt="">
-                                <h4>Luz Restaurant</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/5.png" alt="">
-                                <h4>Birdsong Restaurant</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/6.png" alt="">
-                                <h4>Templo</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/7.png" alt="">
-                                <h4>Landscape Restaurant & Grill</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/7.png" alt="">
-                                <h4>Birdsong Restaurant</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/8.png" alt="">
-                                <h4>Kathmandu Cuisine</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-6">
-                    <div>
-                        <div class="shop-cards">
-                            <a href="menu.html" class="text-decoration-none text-dark">
-                                <img class="shop-img" src="assets/images/shops/9.png" alt="">
-                                <h4>Luz Restaurant</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

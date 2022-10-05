@@ -1,21 +1,21 @@
-@extends('layouts.director')
+@extends('layouts.user')
 @section('content')
     <div class="col-md-9">
+        <div class="col-md-12 px-2 bg-primary rounded">
+            <div class="fs-3 text-white">Available Balance: <span class="float-end">$ {{auth()->user()->balance == null? '0' : auth()->user()->balance}}</span></div>
+        </div>
+        <div class="fs-2 mt-3 text-center">Deposit More Funds</div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="panel panel-default credit-card-box">
-                    <div class="panel-heading display-table" >
-                        <h3 class="panel-title" >Deposit Payment </h3>
-                    </div>
                     <div class="panel-body">
-
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 <strong>Success!</strong> {{session()->get('success')}}
                             </div>
                         @endif
-                            @if (session()->has('fail-message'))
+                        @if (session()->has('fail-message'))
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 <strong>Error!</strong> {{session()->get('fail-message')}}
@@ -31,22 +31,9 @@
                             data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                             id="payment-form">
                             @csrf
-                            <div class="form-group">
-                                <label for="user">Select Depositor</label>
-                                <select class="form-select @error('user_id') is-invalid @enderror" id="user" name="user_id">
-                                    <option selected hidden>Select Depositor</option>
-                                    @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}} <span class="ps-5">{{'('.$user->role.')'}}</span></option>
-                                    @endforeach
-                                </select>
-                                @error('user_id')
-                                <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
-                                @enderror
-                            </div>
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group required'>
+                                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                     <label class='control-label'>Enter Amount</label>
                                     <input class="form-control @error('amount') is-invalid @enderror"   name="amount" type='number'>
                                     @error('amount')
@@ -89,11 +76,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    </body>
-
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <script type="text/javascript">

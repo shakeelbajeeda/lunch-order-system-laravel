@@ -14,4 +14,9 @@ class Shop extends Model
       'opening_time',
       'closing_time'
     ];
+
+
+    public function products() {
+       return $this->belongsToMany(Product::class, ShopProduct::class);
+    }
 }

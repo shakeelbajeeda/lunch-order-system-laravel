@@ -31,7 +31,7 @@ class StripePaymentController extends Controller
                 "amount" => $req['amount'] * 100,
                 "currency" => "aud",
                 "source" => $request->stripeToken,
-                "description" => "aud lunch order system"
+                "description" => "utas lunch order system"
             ]);
             if($res->status == 'succeeded' && $res->paid){
                 $transaction = $this->saveTransactions($res);
@@ -40,43 +40,43 @@ class StripePaymentController extends Controller
                 $balance = $this->addBalanceToDepositorAccount($req);
             }
 
-            Session::flash('success', 'Payment successful!');
+            Session::flash('success', 'Payment deposit successful!');
 
             return back();
         }
         catch (\Stripe\Exception\CardException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (\Stripe\Exception\RateLimitException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (\Stripe\Exception\InvalidRequestException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (\Stripe\Exception\AuthenticationException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (\Stripe\Exception\ApiConnectionException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (\Stripe\Exception\ApiErrorException $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
         catch (Exception $e)
         {
-            Session::flash('fail-message', $e->getError()->message);
+            Session::flash('fail-message', $e->getMessage());
             return back();
         }
     }
@@ -100,8 +100,8 @@ class StripePaymentController extends Controller
     }
     private function addBalanceToDepositorAccount($req)
     {
-        $depositorBalance = User::findOrFail($req['user_id']);
-        $depositorBalance->increment('balance', $req['amount']);
-        return $depositorBalance->save();
+        $user = User::findOrFail($req['user_id']);
+        $user->balance += $req['amount'];
+        $user->save();
     }
 }

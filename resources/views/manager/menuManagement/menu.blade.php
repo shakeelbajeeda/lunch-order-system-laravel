@@ -18,12 +18,6 @@
     <!-- Section Start Here -->
     <section>
         <div class="container py-5">
-            @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> {{session('message')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="text-center fs-2">FOOD & BEVERAGE AVAILABLE AT THE SHOP</div>
@@ -32,10 +26,10 @@
                 <div class="col-md-3 mt-4">
                     <div class="card shadow-lg">
                         <div>
-                            <img src="{{asset('storage/'. $product->image)}}" width="100%" height="200px" alt="product img">
+                            <img src="{{asset('storage/'.$product->image)}}" width="100%" height="200px" alt="product img">
                         </div>
                         <div class="card-body">
-                            <div class="fs-4">{{$product->title}}</div>
+                            <div class="fs-4 title" >{{$product->title}}</div>
                             <div class="fs-6 description">{{$product->description}}</div>
                             <div class="row mt-2">
                                 <div class="col-6">
@@ -45,17 +39,14 @@
                                     Price : $ {{$product->price}}
                                 </div>
                                 <div class="col-12 text-center mt-3">
-                                    <a href="{{route('productDetail',[$product->id])}}" class="btn btn-primary mb-2" style="width: 100%"><i class="fa fa-eye me-2"></i>View Detail</a>
-                                    <a href="{{route('addToCart', [$product->id, $shop->id])}}" class="btn btn-primary text-decoration-none btn-block" style="width: 100%"><i class="fa fa-shopping-cart me-2"></i>Add To Cart</a>
+                                    <a href="{{route('productDetail',[$product->id])}}" class="btn btn-primary rounded-pill mb-2"><i class="fa fa-eye me-2"></i>View Detail</a>
+                                    <a href="{{route('addToCart', [$product->id, $shop->id])}}" class="btn-style text-decoration-none rounded-pill"><i class="fa fa-shopping-cart me-2"></i> Add to cart</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
-{{--                <div class="mt-5 d-grid" style="place-items: center">--}}
-{{--                    {{$shop_products->links()}}--}}
-{{--                </div>--}}
             </div>
         </div>
     </section>

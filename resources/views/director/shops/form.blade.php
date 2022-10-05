@@ -36,6 +36,7 @@
                 </div>
                 <div class="col-12 mt-3">
                     <div class="float-end">
+                        <a href="{{route('shops.index')}}" class="btn btn-secondary rounded-pill">Cancel</a>
                         <button type="submit" class="btn-style rounded-pill"><i
                                 class="{{@$shop ? 'fa fa-clock-o' : 'fa fa-plus'}} me-2"></i>{{@$shop ? 'Update' : 'Add' }}
                         </button>

@@ -32,10 +32,9 @@
             <div class="col-md-3">
                 <div class="rounded py-3 side-bar-bg px-2">
                     <ul class="list-unstyled">
-                        <li class="mt-2"><a href="{{route('users.index')}}" class="text-decoration-none text-dark fs-5" >User Management Page</a></li>
-                        <li class="mt-2"><a href="{{route('shops.index')}}" class="text-decoration-none text-dark fs-5" >Manage Shops</a></li>
-                        <li class="mt-2"><a href="{{route('shopStaff.index')}}" class="text-decoration-none text-dark fs-5" >Manage Shop Staff</a></li>
-                        <li class="mt-2"><a href="{{route('depositPayments')}}" class="text-decoration-none text-dark fs-5" >Deposit Payments</a></li>
+                        <li class="mt-2"><a href="{{url('/account')}}" class="text-decoration-none text-dark fs-5" >Account Balance & Deposit more funds</a></li>
+                        <li class="mt-2"><a href="{{route('setting')}}" class="text-decoration-none text-dark fs-5" >Setting</a></li>
+                        <li class="mt-2"><a href="{{route('user_order_history')}}" class="text-decoration-none text-dark fs-5" >Order History</a></li>
                     </ul>
                 </div>
             </div>
