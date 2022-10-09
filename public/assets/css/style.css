@@ -1,0 +1,158 @@
+.bg-white {
+    background-color: #fff !important;
+}
+
+/* @supports (position:sticky) */
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+#main-nav {
+    -webkit-box-shadow: 0 2px 4px rgb(45 62 80 / 12%);
+    box-shadow: 0 2px 4px rgb(45 62 80 / 12%);
+}
+
+.Testimonial_testimonial-card__11rMe {
+    margin: 15px auto;
+    width: 290px;
+    height: 270px;
+    padding: 22px;
+    background: #fff;
+    border-radius: 0.45rem;
+    -webkit-box-shadow: 0 1px 10px rgb(0 0 0 / 30%);
+    box-shadow: 0 1px 10px rgb(0 0 0 / 30%);
+}
+
+.Testimonial_testimonial-card__11rMe .Testimonial_text__3vCGc p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+#main-footer {
+    color: #fff;
+    padding: 3rem 2rem;
+    background: #2d3e50;
+}
+
+.footer-css {
+    text-decoration: none;
+}
+
+.footer-col-title {
+    font-size: 25px;
+    font-weight: 500;
+    padding: 0 0 0.75rem;
+}
+
+
+.footer-links {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0.4rem 0;
+    color: #cbd6e2;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    text-decoration: none;
+}
+
+.logo {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0
+}
+
+.image-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    margin: auto;
+    display: block;
+    width: 0;
+    height: 0;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%"
+
+}
+
+.pink-background {
+    background-color: rgba(216, 112, 147, 0.822);
+}
+
+.pink-background-text {
+    font-size: 18px;
+    line-height: 30px
+}
+
+.hero-char-image-1 {
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%
+}
+
+.hero-char-image-2 {
+    max-width: 100%;
+    display: block;
+    margin: 0;
+    border: none;
+    padding: 0
+}
+
+.hero-char-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    margin: auto;
+    display: block;
+    width: 0;
+    height: 0;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%
+}
+
+.there-box-background-color {
+    padding: 4.375rem 0 3.125rem;
+    background: #f5f8fa
+}
+
+.there-box-color {
+    width: 90%;
+    height: 100%;
+    box-shadow: 0 8px 30px -5px rgba(51, 71, 91, 0.12)
+}
+
+.image-main-div {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0
+}
+
+.menu-icon-image {
+    max-width: 100%;
+    display: block;
+    margin: 0;
+    border: none;
+    padding: 0
+}
