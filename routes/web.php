@@ -42,7 +42,9 @@ Route::group(['middleware' => ['auth']], function (){
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('menu/{id}', [\App\Http\Controllers\HomeController::class, 'get_shop_products'])->name('get_shop_products');
-
+//Route::get('dashboard',function (){
+//    return view('dashboard.index');
+//});
 Auth::routes();
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

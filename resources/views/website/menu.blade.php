@@ -16,7 +16,7 @@
             -webkit-box-orient: vertical;
         }
     </style>
-    <section class="pink-background">
+    <section class="bg-secondary text-light">
         <div class="row">
             <div class="col-md-4">
             <div class="fs-2 text-center py-5">Opening Time: {{date('h:i A', strtotime($shop->opening_time))}}</div>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-12 py-3">
                 @if(auth()->user())
-               <div class="text-center fs-2">Your Current Balance is: <span class="text-light">$ {{auth()->user()->balance}}</span></div>
+               <div class="text-center fs-2 font-weight-bolder">Your Current Balance is: <span class="text-warning">$ {{auth()->user()->balance}}</span></div>
                 @endif
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <div class="row justify-content-center py-5">
                         @foreach($shop->products as $product)
                         <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card bg-secondary text-light" style="width: 18rem;">
                                 <img src="{{$product->image}}" height="200px" width="200px" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title title">{{$product->title}}</h5>
@@ -61,7 +61,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <button type="submit" class="btn btn-primary w-100">Order Now</button>
+                                    <button type="submit" class="btn btn-warning rounded-pill w-100">Order Now</button>
                                     </form>
                                 </div>
                             </div>
