@@ -42,7 +42,7 @@
                     <div class="row justify-content-center py-5">
                         @foreach($shop->products as $product)
                         <div class="col-md-4">
-                            <div class="card bg-secondary text-light" style="width: 18rem;">
+                            <div class="card bg-secondary text-light mt-5" style="width: 18rem;">
                                 <img src="{{$product->image}}" height="200px" width="200px" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title title">{{$product->title}}</h5>
