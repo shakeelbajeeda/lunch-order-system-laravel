@@ -15,13 +15,8 @@ class Controller extends BaseController
     public function upload_file($img_file,$folder_name= 'products')
     {
 
-        $imgpath = 'storage/images/'.$folder_name;
-        File::makeDirectory($imgpath, $mode = 0777, true, true);
-        $imgDestinationPath = $imgpath.'/';
-        $file_name = time()."_".$img_file->getClientOriginalName();
-        $success = $img_file->move($imgDestinationPath, $file_name);
-        $file_name = 'images/products/'.$file_name;
-        return($file_name);
+        $image = base64_encode(file_get_contents($img_file->path()));
+        return  "data:image/png;base64, " .$image;
     }
 
     public function remove_file($filename,$folder = 'products')

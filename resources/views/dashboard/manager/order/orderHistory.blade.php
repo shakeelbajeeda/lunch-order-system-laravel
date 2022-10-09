@@ -36,7 +36,7 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td class="align-middle">{{ $order->ref_id }}</td>
-                        <td><img src="{{asset('storage') . '/'.$order->product->image}}" alt="product" height="100px" width="100px"></td>
+                        <td><img src="{{$order->product->image}}" alt="product" height="100px" width="100px"></td>
                         <td class="align-middle">{{ $order->product->title }}</td>
                         <td class="align-middle">{{ $order->quantity }}</td>
                         <td class="align-middle">$ {{ $order->price }}</td>
