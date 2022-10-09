@@ -40,7 +40,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->all();
-        $data['image'] = $request->file('image')->storePublicly('images/products', ['disk' => 'public']);
+        // $data['image'] = $request->file('image')->storePublicly('images/products', ['disk' => 'public']);
+        $data['image'] = $this->upload_file($request->file('image'));
         Product::create($data);
         return redirect()->route('products.index');
     }
@@ -78,8 +79,8 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if($request->hasFile('image')){
-            Storage::disk('public')->delete($product->image);
-            $data['image'] = $request->file('image')->storePublicly('images/products', ['disk' => 'public']);
+        $this->remove_file($product->image);
+        $data['image'] = $this->upload_file($request->file('image'));
         }
         $product->update($data);
         return redirect()->route('products.index');
@@ -95,7 +96,8 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         if($product->image){
-            Storage::disk('public')->delete($product->image);
+            $this->remove_file($product->image);
+
             $product->delete();
         }
         return redirect()->back();

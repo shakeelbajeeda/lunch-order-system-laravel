@@ -15,7 +15,7 @@ class ShopSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shops')->upsert([
+        DB::table('shops')->insert([
            [
               'name' => 'Luz Restaurant',
               'owner' => 'Peter Gilmore',
@@ -28,6 +28,6 @@ class ShopSeeder extends Seeder
               'name' => 'Mudbar Restaurant',
               'owner' => 'Gilmore',
            ],
-        ],['name', 'owner']);
+        ]);
     }
 }

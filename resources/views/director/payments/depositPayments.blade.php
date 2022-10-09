@@ -1,5 +1,10 @@
 @extends('layouts.director')
 @section('content')
+<style>
+    .invalid-feedback {
+        display: block!important;
+    }
+</style>
     <div class="col-md-9">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -28,7 +33,6 @@
                             method="post"
                             class="require-validation"
                             data-cc-on-file="false"
-                            data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                             id="payment-form">
                             @csrf
                             <div class="form-group">
@@ -60,22 +64,38 @@
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Card Number</label>
-                                    <input autocomplete='off' class='form-control card-number' maxlength="16" type='text'>
+                                    <input autocomplete='off' name="card_last4" class='form-control card-number' maxlength="16" type='text'>
+                                    @error('card_last4')
+                                    <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                            @enderror
                                 </div>
                             </div>
 
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-4 form-group cvc required'>
                                     <label class='control-label'>CVC</label>
-                                    <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+                                    <input autocomplete='off'  maxlength="3" name="cvc" class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+                                    @error('cvc')
+                                    <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                            @enderror
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
                                     <label class='control-label'>Expiration Month</label>
-                                    <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                                    <input  maxlength="2" name="card_exp_month" class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                                    @error('card_exp_month')
+                                    <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                            @enderror
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
                                     <label class='control-label'>Expiration Year</label>
-                                    <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+                                    <input  maxlength="4" name="card_exp_year" class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+                                    @error('card_exp_year')
+                                    <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                            @enderror
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -94,9 +114,9 @@
 
     </body>
 
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    {{-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> --}}
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
 
         $(function() {
 
@@ -163,5 +183,5 @@
             }
 
         });
-    </script>
+    </script> --}}
 @endsection

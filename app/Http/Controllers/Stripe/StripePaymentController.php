@@ -22,23 +22,22 @@ class StripePaymentController extends Controller
     {
         $req = $request->validate([
             'user_id' => 'required|integer',
-            'amount' =>  'required|integer'
-        ]);
+            'amount' =>  'required|integer|min:1',
+            'card_last4' =>  'required|min:16|max:16',
+            'card_exp_month' =>  'required|min:1|max:2',
+            'card_exp_year' =>  'required|min:4|max:4',
+            'cvc' =>  'required|integer|min:3',
 
+
+        ]);
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         try {
-            $res = Stripe\Charge::create ([
-                "amount" => $req['amount'] * 100,
-                "currency" => "aud",
-                "source" => $request->stripeToken,
-                "description" => "utas lunch order system"
-            ]);
-            if($res->status == 'succeeded' && $res->paid){
-                $transaction = $this->saveTransactions($res);
+                $transaction = $this->saveTransactions($request->all());
                 $id = $transaction->id;
+                $balance = $this->addBalanceToDepositorAccount($request->all());
                 $payment = $this->savePaymentDeposits($req, $id);
-                $balance = $this->addBalanceToDepositorAccount($req);
-            }
+
+            // }
 
             Session::flash('success', 'Payment deposit successful!');
 
@@ -81,12 +80,9 @@ class StripePaymentController extends Controller
         }
     }
     private function saveTransactions($res){
-        $res = $res->toArray();
-        $data['brand'] = $res['payment_method_details']['card']['brand'];
-        $data['card_last4'] = $res['payment_method_details']['card']['last4'];
-        $data['card_exp_month'] = $res['payment_method_details']['card']['exp_month'];
-        $data['card_exp_year'] = $res['payment_method_details']['card']['exp_year'];
-        $data['amount'] = $res['amount'] / 100;
+        $data = $res;
+        $data['brand'] = 'Visa';
+        $data['card_last4'] = substr($res['card_last4'], -7);
         return Transaction::create($data);
     }
     private function savePaymentDeposits($req, $id){

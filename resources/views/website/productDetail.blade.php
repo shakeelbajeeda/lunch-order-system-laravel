@@ -9,7 +9,7 @@
         <div class="row py-5">
             <div class="col-md-6">
                 <div>
-                    <img src="{{asset('storage/'.$product->image)}}" width="100%" height="auto" class="rounded" alt="product img">
+                    <img src="{{ $product->image }}" width="100%" height="auto" class="rounded" alt="product img">
                 </div>
             </div>
             <div class="col-md-6">

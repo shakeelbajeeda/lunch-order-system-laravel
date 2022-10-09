@@ -26,7 +26,7 @@
                 <div class="col-md-3 mt-4">
                     <div class="card shadow-lg">
                         <div>
-                            <img src="{{asset('storage/'.$product->image)}}" width="100%" height="200px" alt="product img">
+                            <img src="{{$product->image}}" width="100%" height="200px" alt="product img">
                         </div>
                         <div class="card-body">
                             <div class="fs-4 title" >{{$product->title}}</div>

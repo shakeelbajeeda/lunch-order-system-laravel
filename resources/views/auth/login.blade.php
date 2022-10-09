@@ -4,6 +4,11 @@
         <div class="m-auto">
             <div class="container header-bg p-5 rounded">
                 <div class="fs-3 text-center">Login Account</div>
+                @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">

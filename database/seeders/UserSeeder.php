@@ -30,6 +30,12 @@ class UserSeeder extends Seeder
               'password' => Hash::make('12345678'),
               'role'   => 'manager'
           ],
+            [
+                'name' => 'Amandeep Manager',
+                'email' => 'aman@manager.com',
+                'password' => Hash::make('12345678'),
+                'role'   => 'manager'
+            ],
           [
               'name' => 'Shop Staff',
               'email' => 'staff@gmail.com',

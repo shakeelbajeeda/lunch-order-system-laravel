@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
            UserSeeder::class,
            ProductSeeder::class,
            ShopSeeder::class,
+            AssignShopToStaffSeeder::class,
+            AddProductsToMenuSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
