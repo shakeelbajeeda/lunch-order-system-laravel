@@ -8,7 +8,7 @@
         <div class="mt-5 row justify-content-center" id="shop_section">
             @foreach($shops as $shop)
                 <div class="col-md-4">
-                    <div class="card py-4 bg-dark">
+                    <div class="card py-4 bg-dark mt-5">
                         <div class="text-center">
                             <h3 class="text-light font-weight-bolder">
                                 {{$shop->name}}
