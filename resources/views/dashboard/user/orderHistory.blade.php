@@ -27,6 +27,7 @@
                     <th>Product</th>
                     <th>Title</th>
                     <th>Quantity</th>
+                    <th>Discount</th>
                     <th>Price</th>
                     <th>Shop</th>
                     <th>Date</th>
@@ -39,6 +40,7 @@
                         <td><img src="{{$order->product->image}}" alt="product" height="100px" width="100px"></td>
                         <td class="align-middle">{{ $order->product->title }}</td>
                         <td class="align-middle">{{ $order->quantity }}</td>
+                        <td class="align-middle">$ {{ $order->discount }}</td>
                         <td class="align-middle">$ {{ $order->price }}</td>
                         <td class="align-middle">{{$order->shop->name}} </td>
                         <td class="align-middle">{{date('Y, M d: h i A', strtotime($order->created_at))}}   </td>

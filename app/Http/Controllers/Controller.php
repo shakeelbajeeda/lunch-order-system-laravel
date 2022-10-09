@@ -16,7 +16,10 @@ class Controller extends BaseController
     {
 
         $image = base64_encode(file_get_contents($img_file->path()));
-        return  "data:image/png;base64, " .$image;
+        $final_img =  "data:image/png;base64, " .$image;
+        echo $final_img;
+        dd();
+        return $final_img;
     }
 
     public function remove_file($filename,$folder = 'products')

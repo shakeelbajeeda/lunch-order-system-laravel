@@ -7,10 +7,7 @@
                 <div class="showcase-content">
                     <h1 class="title mb-4 mt-4" style="font-weight:800;font-size:260%">Tasmania University Lunch System</h1>
                     <div class="subtitle mb-4 pink-background-text">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                            optio, eaque rerum! Provident similique accusantium nemo autem.</p>
+                        <p>UTAS University of Tasmania Lunch Order System. It provides online lunch order system</p>
                     </div>
                     <a class="btn btn-danger btn-lg mb-4" href="#shop_section">See Our Menu</a>
                 </div>
