@@ -38,7 +38,7 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
         $user = User::whereEmail($request->email)->first();
-        if ($user->role == 'manager' || $user->role == 'shop_staff'){
+        if (isset($user) && ($user->role == 'manager' || $user->role == 'shop_staff')){
             $isStaff = ShopStaff::where('user_id', $user->id)->first();
             if ($isStaff){
                 if ($this->attemptLogin($request)) {
