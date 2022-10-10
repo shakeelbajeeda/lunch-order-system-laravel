@@ -16,6 +16,7 @@ class Order extends Model
         'shop_id',
         'quantity',
         'ref_id',
+        'note',
     ];
 
     public function product()

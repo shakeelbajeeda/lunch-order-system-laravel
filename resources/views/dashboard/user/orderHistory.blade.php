@@ -31,6 +31,7 @@
                     <th>Price</th>
                     <th>Shop</th>
                     <th>Date</th>
+                    <th>Comments</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,8 @@
                         <td class="align-middle">$ {{ $order->price }}</td>
                         <td class="align-middle">{{$order->shop->name}} </td>
                         <td class="align-middle">{{date('Y, M d: h i A', strtotime($order->created_at))}}   </td>
+                        <td class="align-middle">{{$order->note}} </td>
+
                     </tr>
                 @endforeach
                 </tbody>

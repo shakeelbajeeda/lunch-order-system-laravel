@@ -46,6 +46,7 @@ class OrderController extends Controller
         $data['discount'] = $discount;
         $data['price'] = $total;
         $data['quantity'] = $req->quantity;
+        $data['note'] = $req->note ?? null;
         return Order::create($data);
     }
 }
