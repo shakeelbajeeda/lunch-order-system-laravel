@@ -16,7 +16,7 @@ class IsUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == 'user'){
+        if (auth()->user()->role == 'user' || auth()->user()->role == 'employee'){
             return $next($request);
         }else{
             return redirect()->with('error', 'You do not have user access');

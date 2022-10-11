@@ -76,7 +76,7 @@
         <!-- End Nav Item - ShopStaff Dashboard -->
 
         <!-- Nav Item - User Dashboard -->
-        @if(auth()->user()->role == 'user')
+        @if(auth()->user()->role == 'user' || auth()->user()->role = 'employee')
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('deposit_payments')}}">
                     <i class="fas fa-fw fa-cog"></i>

@@ -40,6 +40,18 @@
                 @enderror
             </div>
             <div class="form-group mt-3">
+                <select name="role" class="form-select" required>
+                    <option value="">Select Role</option>
+                    <option value="user">Student</option>
+                    <option value="employee">Employee</option>
+                </select>
+                   @error('role')
+                   <span class="invalid-feedback" role="alert">
+                       <strong>{{ $message }}</strong>
+                   </span>
+                   @enderror
+               </div>
+            <div class="form-group mt-3">
              <input type="password" placeholder="Password" name="password" class="@error('password') is-invalid @enderror">
                 @error('password')
                 <span class="invalid-feedback" role="alert">

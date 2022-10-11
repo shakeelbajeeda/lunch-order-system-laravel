@@ -74,9 +74,7 @@
     </section>
 
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
+
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,7 +102,7 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <textarea class="form-control" name="note" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Comments (Optinal)</label>
+                                <label for="floatingTextarea2">Comments (Optional)</label>
                               </div>
                         </div>
                     </div>

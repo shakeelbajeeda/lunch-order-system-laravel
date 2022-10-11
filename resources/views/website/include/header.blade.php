@@ -55,7 +55,7 @@
                                 <a class="nav-link text-white" href="{{route('shop_order_history')}}">Dashboard</a>
                             </li>
                     @endif
-                    @if(auth()->user()->role == 'user')
+                    @if(auth()->user()->role == 'user' || auth()->user()->role == 'employee')
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{{route('deposit_payments')}}">Dashboard</a>
                             </li>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->bigInteger('balance')->default(0);
-            $table->enum('role', ['director', 'manager', 'user', 'shop_staff'])->default('user');
+            $table->enum('role', ['director', 'manager', 'user', 'shop_staff', 'employee'])->default('user');
             $table->string('password');
             $table->timestamps();
         });
