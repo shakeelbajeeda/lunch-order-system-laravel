@@ -17,8 +17,6 @@ class Controller extends BaseController
 
         $image = base64_encode(file_get_contents($img_file->path()));
         $final_img =  "data:image/png;base64, " .$image;
-        echo $final_img;
-        dd();
         return $final_img;
     }
 
