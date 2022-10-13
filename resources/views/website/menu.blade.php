@@ -17,28 +17,29 @@
         }
     </style>
     <section class="bg-secondary text-light">
-        <div class="row">
-            <div class="col-md-4">
-            <div class="fs-2 text-center py-5">Opening Time: {{date('h:i A', strtotime($shop->opening_time))}}</div>
-            </div>
-            <div class="col-md-4">
-            <div class="fs-2 text-center py-5">{{$shop->name}}</div>
-            </div>
-            <div class="col-md-4">
-            <div class="fs-2 text-center py-5">Closing Time: {{date('h:i A', strtotime($shop->closing_time))}}</div>
-            </div>
-            <div class="col-md-12 py-3">
-                @if(auth()->user())
-               <div class="text-center fs-2 font-weight-bolder">Your Current Balance is: <span class="text-warning">$ {{auth()->user()->balance}}</span></div>
-                @endif
-            </div>
-        </div>
+                    <marquee class="row py-5 text-info">
+                        <div class="fs-2">Shop Opening Time: {{date('h:i A', strtotime($shop->opening_time))}}</div>
+                        <div class="fs-2 text-center">Shop => {{$shop->name}}</div>
+                        <div class="fs-2">Shop Closing Time: {{date('h:i A', strtotime($shop->closing_time))}}</div>
+                    </marquee>
     </section>
     <section>
         <div class="container">
             <section>
                 <div class="container">
-                    <h2 class="h1 text-center fw-bold mb-4 mt-5">Shop Menu</h2>
+                    <h2 class="h1 text-center fw-bold mb-4 mt-5">Menu</h2>
+                    @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>Error!</strong> {{session('error')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if(session('message'))
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <strong>Success!</strong> {{session('message')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="row justify-content-center py-5">
                         @foreach($shop->products as $product)
                         <div class="col-md-4">
@@ -47,22 +48,17 @@
                                 <div class="card-body">
                                     <h5 class="card-title title">{{$product->title}}</h5>
                                     <p class="card-text description">{{$product->description}}</p>
-                                    <form action="{{route('order_now')}}" method="post">
-                                        @csrf
                                         <div class="row py-3">
                                             <div class="col-5">
                                                 <div class="text-right">Price: $ {{$product->price}}</div>
                                             </div>
                                             <div class="col-7">
                                                 <div>
-                                                    <input type="hidden" name="product_id" value="{{$product->id}}">
-                                                    <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                                     Quantity: <input type="number" id="quantity" name="quantity" value="1" style="width: 50px" min="1">
                                                 </div>
                                             </div>
                                         </div>
-                                    <button type="submit" class="btn btn-warning rounded-pill w-100">Order Now</button>
-                                    </form>
+                                    <a  href="{{route('product_detail', [$product->id, $shop->id])}}" type="submit" class="btn btn-warning rounded-pill w-100">View Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -72,33 +68,4 @@
             </section>
         </div>
     </section>
-    <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
-        @endif
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endif
-    </script>
 @endsection

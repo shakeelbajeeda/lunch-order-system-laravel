@@ -1,10 +1,40 @@
 @extends('layouts.dashboard')
 @section('content')
-    <div class="container">
-        <div class="py-3 text-center h2">
-            Deposit Payments
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Form</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Dashboard</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Deposit More Funds
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <div class="h3 my-3 text-center text-primary">
+    </div>
+
+    <div class="container">
+        <div class="py-3 text-info text-center h2">
+            Deposit More Funds
+        </div>
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <strong>Error!</strong> {{session('error')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <strong>Success!</strong> {{session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <div class="h3 my-3 text-center text-info">
             Your Current Balance is : $ {{ auth()->user()->balance }}
         </div>
        <div class="row justify-content-center mt-5">
@@ -70,39 +100,10 @@
                        </div>
                    </div>
                    <div>
-                       <button class="btn btn-primary btn-block">Deposit Payment</button>
+                       <button class="btn btn-info btn-block">Deposit Payment</button>
                    </div>
                </form>
            </div>
        </div>
     </div><br>
-    <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
-        @endif
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endif
-    </script>
 @endsection

@@ -1,56 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="login">
-        <div class="login-triangle"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <strong>Error!</strong> {{session('error')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Login') }}</div>
 
-        <h2 class="login-header">Login Account</h2>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
 
-        <form class="login-container" action="{{route('login')}}" method="post">
-            @csrf
-            <div class="form-group">
-            <input type="email" placeholder="Email" name="email"  class="@error('email') is-invalid @enderror">
-                @error('email')
-                 <span class="invalid-feedback" role="alert">
-                     <strong>{{$message}}</strong>
-                 </span>
-                @enderror
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus>
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group mt-4">
-            <input type="password" placeholder="Password" name="password" class="@error('password') is-invalid @enderror">
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="my-4">
-            <input type="submit" value="Login">
-            </div>
-            <a href="{{url('/')}}">Go Website</a> <a href="{{route('register')}}" class="float-end">Register?</a>
-        </form>
+        </div>
     </div>
-    <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endif
-    </script>
 @endsection
+

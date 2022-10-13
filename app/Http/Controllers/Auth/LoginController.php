@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\ShopStaff;
+use App\Models\ShopManager;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -24,6 +24,12 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -39,7 +45,7 @@ class LoginController extends Controller
         }
         $user = User::whereEmail($request->email)->first();
         if (isset($user) && ($user->role == 'manager' || $user->role == 'shop_staff')){
-            $isStaff = ShopStaff::where('user_id', $user->id)->first();
+            $isStaff = ShopManager::where('user_id', $user->id)->first();
             if ($isStaff){
                 if ($this->attemptLogin($request)) {
                     if ($request->hasSession()) {
@@ -77,6 +83,10 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -92,6 +102,9 @@ class LoginController extends Controller
      */
 //    protected $redirectTo = RouteServiceProvider::HOME;
 
+    /**
+     * @return string
+     */
     public function redirectTo() {
         $role = Auth::user()->role;
         switch ($role) {

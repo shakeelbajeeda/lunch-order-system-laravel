@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth', 'director']], function (){
    Route::resources([
        'user' => \App\Http\Controllers\Director\UserController::class,
-       'shop' => \App\Http\Controllers\Director\ShopController::class,
-       'shopstaff' => \App\Http\Controllers\Director\ShopStaffController::class,
+       'shop' => \App\Http\Controllers\Director\AusShopController::class,
+       'shopstaff' => \App\Http\Controllers\Director\ShopManagerController::class,
        'product' => \App\Http\Controllers\Director\ProductController::class,
    ]);
 });
@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function (){
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('menu/{id}', [\App\Http\Controllers\HomeController::class, 'get_shop_products'])->name('get_shop_products');
+Route::get('/product/detail/{id}/{shop_id}', [\App\Http\Controllers\HomeController::class, 'show_product'])->name('product_detail');
 Auth::routes();
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

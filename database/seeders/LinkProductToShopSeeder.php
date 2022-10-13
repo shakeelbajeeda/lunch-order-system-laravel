@@ -15,7 +15,7 @@ class LinkProductToShopSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shop_staff')->insert([
+        DB::table('shop_managers')->insert([
 
             [
                 'shop_id' => 1,

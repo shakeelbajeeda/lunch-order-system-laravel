@@ -1,80 +1,70 @@
 @extends('layouts.dashboard')
 @section('content')
-    <style>
-        .table-responsive1 {
-            width: 100%;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            /* overflow-y: hidden; */
-            -webkit-overflow-scrolling: touch;
-            -ms-overflow-style: -ms-autohiding-scrollbar;
-            border: 1px solid #DDD;
-        }
-
-        .w_120 {
-            width: 120px;
-        }
-    </style>
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Tables</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Dashboard</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Shops Table
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="my-3">
-            <a href="{{route('shop.create')}}" class="btn btn-primary">Add New Shop</a>
+            <a href="{{route('shop.create')}}" class="btn btn-info">Add New Shop</a>
         </div>
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <strong>Error!</strong> {{session('error')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <strong>Success!</strong> {{session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Owner</th>
-                    <th class="w_120">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($shops as $shop)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-0">Shops Table</h5>
+                </div>
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>{{ $shop->name }}</td>
-                        <td>{{ $shop->owner }}</td>
-                        <td class="row overflow-auto w_120">
-                            <form method="POST" action="{{ route('shop.destroy', $shop->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                            </form>
-                            <a class="ml-3 btn btn-info" style="height: 40px"
-                               href="{{ route('shop.edit', $shop->id) }}"><i class="fa fa-edit"></i></a>
-                        </td>
+                        <th>Name</th>
+                        <th>Owner</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($shops as $shop)
+                        <tr>
+                            <td>{{ $shop->name }}</td>
+                            <td>{{ $shop->owner }}</td>
+                            <td class="d-flex">
+                                <form method="POST" action="{{ route('shop.destroy', $shop->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                </form>
+                                <a class="ms-2 btn btn-info"
+                                   href="{{ route('shop.edit', $shop->id) }}"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div><br>
-    <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
-        @endif
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endif
-    </script>
 @endsection

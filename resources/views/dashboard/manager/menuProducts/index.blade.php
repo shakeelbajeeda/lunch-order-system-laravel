@@ -1,99 +1,70 @@
 @extends('layouts.dashboard')
 @section('content')
-    <style>
-        .table-responsive1 {
-            width: 100%;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            /* overflow-y: hidden; */
-            -webkit-overflow-scrolling: touch;
-            -ms-overflow-style: -ms-autohiding-scrollbar;
-            border: 1px solid #DDD;
-        }
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Tables</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Dashboard</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Master & Beverage Food List
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        .w_50 {
-            width: 50px;
-        }
-
-        .w_100 {
-            width: 100px;
-        }
-
-        .w_150 {
-            width: 150px;
-        }
-
-        .w_250 {
-            width: 250px;
-        }
-
-        .w_200 {
-            width: 200px;
-        }
-
-        .w_120 {
-            width: 120px;
-        }
-    </style>
     <div class="container">
-        <div class="text-center h1 my-3">
+        <div class="text-center text-info h1 my-3">
             Master Food & Beverage List
         </div>
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <strong>Error!</strong> {{session('error')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <strong>Success!</strong> {{session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th >Price</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($products as $product)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-0"> Master & Beverage Food List Table</h5>
+                </div>
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td><img src="{{$product->image}}" alt="product" height="100px" width="100px"></td>
-                        <td class="align-middle">{{ $product->title }}</td>
-                        <td class="align-middle">$ {{ $product->price }}</td>
-                        <td class="align-middle">{{ $product->description }}</td>
-                        <td>
-                            <a class="ml-3 btn btn-info mt-4"
-                               href="{{ route('add_product_to_menu', $product->id) }}"><i class="fa fa-plus"></i>Add Product</a>
-                        </td>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th >Price</th>
+                        <th>Description</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($products as $product)
+                        <tr>
+                            <td><img src="{{$product->image}}" alt="product" height="100px" width="100px"></td>
+                            <td class="align-middle">{{ $product->title }}</td>
+                            <td class="align-middle">$ {{ $product->price }}</td>
+                            <td class="align-middle">{{ $product->description }}</td>
+                            <td>
+                                <a class="ml-3 btn btn-info mt-4"
+                                   href="{{ route('add_product_to_menu', $product->id) }}"><i class="fa fa-plus me-2"></i>Add Product</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div><br>
-    <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
-        @endif
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endif
-    </script>
 @endsection

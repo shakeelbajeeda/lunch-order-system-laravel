@@ -15,18 +15,18 @@ class ShopSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shops')->insert([
+        DB::table('aus_shops')->insert([
             [
                 'name' => 'Bucking Bull',
-                'owner' => 'Poonam',
+                'owner' => 'Timi',
             ],
             [
                 'name' => 'Burger Fuel',
-                'owner' => 'Poonam',
+                'owner' => 'Timi',
             ],
             [
                 'name' => 'KFC',
-                'owner' => 'Poonam',
+                'owner' => 'Timi',
             ],
         ]);
     }

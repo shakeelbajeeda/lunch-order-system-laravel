@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class OrderController extends Controller
         $total = $request->quantity * $product->price;
         $user = auth()->user();
         $discount = 0;
-        if($user->role == 'user') {
+        if($user->role == 'student') {
             $discount = round($total * 10 /100);
             $total = $total - $discount;
         }
@@ -46,6 +46,7 @@ class OrderController extends Controller
         $data['discount'] = $discount;
         $data['price'] = $total;
         $data['quantity'] = $req->quantity;
-        return Order::create($data);
+        $data['comment'] = $req->comment;
+        return OrderProduct::create($data);
     }
 }

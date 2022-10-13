@@ -39,16 +39,15 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->all();
-        $data['image'] = $this->upload_file($request->file('image'));
+        $image = base64_encode(file_get_contents($request->file('image')->path()));
+        $data['image'] = "data:image/png;base64, " .$image;
         Product::create($data);
         return redirect()->route('product.index')->with('message', 'product added successfully');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return void
      */
     public function show(Product $product)
     {
@@ -76,10 +75,6 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $data = $request->all();
-        if($request->hasFile('image')){
-            $this->remove_file($request->image);
-            $data['image'] = $this->upload_file($request->file('image'));
-        }
         $product->update($data);
         return redirect()->route('product.index')->with('message', 'Product updated successfully');
     }
@@ -92,10 +87,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if($product->image){
-            $this->remove_file($product->image);
             $product->delete();
-        }
         return redirect()->back()->with('message', 'product deleted successfully');
     }
 }

@@ -1,25 +1,29 @@
 @extends('layouts.website')
 @section('content')
-<section class="text-center there-box-background-color">
+    <section>
+        <img src="{{asset('website.jpg')}}" height="550px" width="100%" alt="">
+    </section>
+<section>
     <div class="container pb-5">
-        <h2 class="my-5">Shop
-            <span class="text-danger h2">Links</span>
+        <h2 class="my-5 text-primary text-center">
+            All Shops Links
         </h2>
-        <div class="mt-5 row justify-content-center" id="shop_section">
+        <div class="row justify-content-center pb-5">
             @foreach($shops as $shop)
-                <div class="col-md-4">
-                    <div class="card py-4 bg-dark mt-5">
-                        <div class="text-center">
-                            <h3 class="text-light font-weight-bolder">
-                                {{$shop->name}}
-                            </h3>
-                            <br>
-                            <a class="btn btn-warning rounded-pill px-5" href="{{route('get_shop_products', [$shop->id])}}">
-                                Visit Shop
-                            </a>
-                        </div>
+            <div class="col-md-4 mt-2">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Restaurant
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$shop->name}}</h5>
+                        <a href="{{route('get_shop_products', [$shop->id])}}" class="btn btn-primary">Show Products</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Tasmania Lunch System
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePaymentRequest;
-use App\Models\PaymentDeposit;
-use App\Models\Transaction;
+use App\Models\DepositPayment;
+use App\Models\PaymentTransaction;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -27,7 +27,7 @@ class PaymentController extends Controller
       $data['card_last4'] = substr($req['card_number'], -4);
       $data['card_exp_month'] = $req['month'];
       $data['card_exp_year'] = $req['year'];
-      return Transaction::create($data);
+      return PaymentTransaction::create($data);
     }
 
     private function save_payment_deposit($req, $id)
@@ -36,7 +36,7 @@ class PaymentController extends Controller
         $data['amount'] = $req['amount'];
         $data['payment_method'] = 'Stripe';
         $data['transaction_id'] = $id;
-        return PaymentDeposit::create($data);
+        return DepositPayment::create($data);
     }
 
     private function add_balance_to_depositor_account($req)
