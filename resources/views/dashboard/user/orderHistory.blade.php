@@ -34,6 +34,7 @@
                         <th>Product</th>
                         <th>Title</th>
                         <th>Quantity</th>
+                        <th>Discount</th>
                         <th>Price</th>
                         <th>Comment</th>
                         <th>Shop</th>
@@ -47,6 +48,7 @@
                             <td><img src="{{$order->product->image}}" alt="product" height="100px" width="100px"></td>
                             <td class="align-middle">{{ $order->product->title }}</td>
                             <td class="align-middle">{{ $order->quantity }}</td>
+                            <td class="align-middle">$ {{ $order->discount }}</td>
                             <td class="align-middle">$ {{ $order->price }}</td>
                             <td class="align-middle">{{ $order->comment }}</td>
                             <td class="align-middle">{{$order->shop->name}} </td>

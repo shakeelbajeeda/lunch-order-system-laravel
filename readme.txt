@@ -1,27 +1,22 @@
-            Credentials to Login as Staff
+            Staff Login Details
 
-                        [
-                            'name' => 'Poonam Director',
-                            'email' => 'poonam@director.com',
-                            'password' => 'password',
-                            'role'   => 'director',
-                        ],
-                        [
-                            'name' => 'Manager',
-                            'email' => 'poonam@manager.com',
-                            'password' => 'password',
-                            'role'   => 'manager',
-                        ],
+Director
 
-                        [
-                            'name' => 'Manager User2',
-                            'email' => 'manager@manager.com',
-                            'password' => 'password',
-                            'role'   => 'manager',
-                        ],
-                        [
-                            'name' => 'Staff User',
-                            'email' => 'poonam@staff.com',
-                            'password' => 'password',
-                            'role'   => 'shop_staff',
-                        ],
+ 'email' => timi@director.com
+ 'password' => timi123
+
+ Manager
+
+'email' => timi@manager.com
+'password' => timi123
+
+Manager
+
+'email' => wang@manager.com
+'password' => wang123
+
+Shop Staff
+'email' => wenzhou@staff.com
+'password' => wenzhou123
+
+
