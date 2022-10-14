@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->bigInteger('card_number')->nullable();
+            $table->integer('cvc')->nullable();
+            $table->date('card_expiry')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->bigInteger('balance')->default(0);

@@ -1,106 +1,95 @@
-<header class="bg-secondary">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="{{url('/')}}">
-            <span class="text-light">
-              Tasmania Lunch Order System
-            </span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<header>
+    <!-- Nav Section -->
+    <div class="nav">
+        <div class="container">
+            <div class="nav__wrapper">
+                <a href="{{url('/')}}" class="logo">
+                    <img src="{{asset('website/images/logo4.png')}}" alt="canteen">
+                </a>
+                <nav>
+                    <div class="nav__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-menu">
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </div>
+                    <div class="nav__bgOverlay"></div>
+                    <ul class="nav__list">
+                        <div class="nav__close">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </div>
+                        <div class="nav__list__wrapper">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  mx-auto ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{url('/')}}">Home</a>
-                    </li>
-                    @if(auth()->check())
-                        @if(auth()->user()->role == 'manager' || auth()->user()->role == 'shop_staff')
-                            @php
-                                $shopStaff = \App\Models\ShopManager::where('user_id', auth()->user()->id)->first();
-                                $shop = \App\Models\AusShop::where('id', $shopStaff->shop_id)->first();
-                            @endphp
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    Menu
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                           href="{{route('get_shop_products', [$shop->id])}}">{{$shop->name}}</a></li>
-                                </ul>
-                            </li>
-                        @endif
-                    @endif
-
-                    @if(!auth()->user() || auth()->user()->role == 'user' || auth()->user()->role == 'student' || auth()->user()->role == 'employee')
-                        @php
-                            $shops = \App\Models\AusShop::all();
-                        @endphp
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Menu
-                            </a>
-                            <ul class="dropdown-menu">
-                                @foreach($shops as $shop)
-                                    <li><a class="dropdown-item"
-                                           href="{{route('get_shop_products',[$shop->id])}}">{{$shop->name}}</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
+                            <li><a class="nav__link" href="{{url('/')}}">Home</a></li>
+{{--                            Director Links--}}
+                            @if(auth()->check())
+                            @if(auth()->user()->role == 'director')
+                                <li><a href="{{route('user.index')}}" class="text-dark fs-3">User Management</a></li>
+                                <li><a href="{{route('shop.index')}}" class="text-dark fs-3">Shop Management</a></li>
+                                <li><a href="{{route('shopstaff.index')}}" class="text-dark fs-3">ShopStaff Management</a></li>
+                                <li><a href="{{route('product.index')}}" class="text-dark fs-3">Master & Beverage</a></li>
+                            @endif
+                            @if(auth()->user()->role == 'manager')
+                                <li><a href="{{route('menu_management')}}" class="text-dark fs-3">Menu Management</a></li>
+                                    @php
+                                        $shopStaff = \App\Models\ShopManager::where('user_id', auth()->user()->id)->first();
+                                        $shop = \App\Models\AusShop::findOrFail($shopStaff->shop_id);
+                                    @endphp
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle fs-3 text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Menu
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item fs-3" href="{{route('get_shop_products',[$shop->id])}}">{{$shop->name}}</a>
+                                                </li>
+                                        </ul>
                                     </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endif
-                    @if(auth()->check())
-                        @if(auth()->user()->role == 'director')
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{route('product.index')}}">MASTER FOOD & BEVERAGE
-                                    LIST</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{route('user.index')}}">Dashboard</a>
-                            </li>
-                        @endif
-                        @if(auth()->user()->role == 'manager' || auth()->user()->role == 'shop_staff')
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{route('shop_order_history')}}">Dashboard</a>
-                            </li>
-                        @endif
-                        @if(auth()->user()->role == 'user' || auth()->user()->role == 'student' || auth()->user()->role == 'employee')
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{route('deposit_payments')}}">Dashboard</a>
-                            </li>
-                        @endif
-                    @endif
-                </ul>
-                <div class="user_option">
-                    <ul class="navbar-nav float-right me-5">
+                            @endif
+                            @if(auth()->user()->role == 'manager' || auth()->user()->role == 'shop_staff')
+                                <li><a href="{{route('shop_order_history')}}" class="text-dark fs-3">My Shop Order History</a></li>
+                            @endif
+                                @if(auth()->user()->role == 'user' || auth()->user()->role == 'employee' || auth()->user()->role == 'student')
+                                    <li><a href="{{route('order_history')}}" class="text-dark fs-3">My Order History</a></li>
+                                    <li><a href="{{route('deposit_payments')}}" class="text-dark fs-3">Deposit Payment</a></li>
+                                @endif
+                            @endif
+                            @if(!auth()->user() || auth()->user()->role == 'user' || auth()->user()->role == 'employee' || auth()->user()->role == 'student')
+                                @php
+                                    $shops = \App\Models\AusShop::all();
+                                @endphp
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle fs-3 text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Menu
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @foreach($shops as $shop)
+                                            <li><a class="dropdown-item fs-3" href="{{route('get_shop_products',[$shop->id])}}">{{$shop->name}}</a>
+                                            </li>
+                                            <hr>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
                         @if(auth()->user())
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{auth()->user()->name}}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item text-danger" href="{{route('logout')}}">Logout</a></li>
-                                </ul>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link text-white btn btn-info px-3                                                                                                                              "
-                                   href="{{route('login')}}">Login</a>
-                            </li>
-                            <li class="nav-item ms-3">
-                                <a class="nav-link text-white btn btn-info px-4"
-                                   href="{{route('register')}}">Register</a>
-                            </li>
-                        @endif
+                                <li class="fs-3 ms-5">{{auth()->user()->name}}</li>
+                                <li><a href="{{route('logout')}}" class="btn btn-danger fs-3">Logout</a></li>
+                            @else
+                                <li><a href="{{route('login')}}" class="btn btn-primary ms-5 fs-3">Login</a></li>
+                                <li><a href="{{route('register')}}" class="btn btn-primary fs-3">Registration</a></li>
+                            @endif
+                        </div>
                     </ul>
-                </div>
+                </nav>
             </div>
-        </nav>
+        </div>
     </div>
+    <!-- End Nav Section -->
 </header>

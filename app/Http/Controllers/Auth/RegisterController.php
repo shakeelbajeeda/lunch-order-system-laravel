@@ -57,6 +57,9 @@ class RegisterController extends Controller
             'phone' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'user_type' => ['required', Rule::in(['student', 'employee'])],
+            'card_number' => ['required', 'integer', 'min:16'],
+            'cvc' => ['required', 'integer'],
+            'card_expiry' => ['required']
         ]);
     }
 
@@ -75,6 +78,9 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'role' => $data['user_type'],
+            'card_number' => $data['card_number'],
+            'card_expiry' => $data['card_expiry'],
+            'cvc' => $data['cvc'],
         ]);
     }
 }

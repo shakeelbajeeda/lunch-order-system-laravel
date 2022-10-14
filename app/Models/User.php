@@ -23,7 +23,10 @@ class User extends Authenticatable
         'address',
         'phone',
         'password',
-        'role'
+        'role',
+        'card_expiry',
+        'card_number',
+        'cvc',
     ];
 
     /**

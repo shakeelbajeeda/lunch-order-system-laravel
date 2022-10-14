@@ -42,7 +42,7 @@ class UserController extends Controller
         $validated = $request->validated();
         $validated['password'] = Hash::make($request->password);
         User::create($validated);
-        return redirect()->route('user.index')->with('message', 'User Created Successfully');
+        return redirect()->route('user.index')->with('message', 'User has been added Successfully');
     }
 
     /**
@@ -83,7 +83,7 @@ class UserController extends Controller
             $validated['password'] = $user->password;
         }
         $user->update($validated);
-        return redirect()->route('user.index')->with('message', 'User Updated Successfully');
+        return redirect()->route('user.index')->with('message', 'User has been updated Successfully');
     }
 
     /**
@@ -95,11 +95,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->id == auth()->user()->id){
-            return redirect()->back()->with('error', 'You can not remove yourself');
+            return redirect()->back()->with('error', 'director can not be deleted');
         }
         else{
             $user->delete();
-            return redirect()->back()->with('message', 'User deleted successfully');
+            return redirect()->back()->with('message', 'User has been deleted successfully');
         }
 
     }

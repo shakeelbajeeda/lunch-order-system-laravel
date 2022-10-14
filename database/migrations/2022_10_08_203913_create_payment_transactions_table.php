@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('brand')->default('visa');
             $table->integer('amount');
             $table->integer('card_last4');
-            $table->integer('card_exp_month');
-            $table->integer('card_exp_year');
+            $table->string('card_exp_month');
+            $table->string('card_exp_year');
             $table->timestamps();
         });
     }

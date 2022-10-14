@@ -25,10 +25,6 @@ class StorePaymentRequest extends FormRequest
     {
         return [
             'amount' => 'required|integer',
-            'card_number' => 'required|integer|min:16',
-            'csv' => 'required|integer|min:3',
-            'month' => 'required|integer',
-            'year' => 'required|integer'
         ];
     }
 }
