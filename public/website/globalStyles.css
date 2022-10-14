@@ -5,7 +5,7 @@ html {
 }
 body {
 	background: var(--lightGreen-2);
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 	visibility: hidden;
 }
 section {
