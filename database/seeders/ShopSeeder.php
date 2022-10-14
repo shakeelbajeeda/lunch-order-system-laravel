@@ -17,16 +17,16 @@ class ShopSeeder extends Seeder
     {
         DB::table('aus_shops')->insert([
             [
-                'name' => 'Bucking Bull',
-                'owner' => 'Timi',
+                'name' => 'McLoons Lobster Shack',
+                'owner' => 'Puja',
             ],
             [
-                'name' => 'Burger Fuel',
-                'owner' => 'Timi',
+                'name' => 'Chaco Bar',
+                'owner' => 'Khushbuben',
             ],
             [
-                'name' => 'KFC',
-                'owner' => 'Timi',
+                'name' => 'Grossi Florentino',
+                'owner' => 'Bindiya',
             ],
         ]);
     }

@@ -17,22 +17,22 @@ class ProductSeeder extends Seeder
         $photos = $this->findEncodedImages();
         DB::table('products')->insert([
             [
-                'title' => 'Pepperoni Pizza',
-                'price' => 100,
-                'description' => 'Pepperoni Pizza',
+                'title' => 'Veggie Pizza',
+                'price' => 80,
+                'description' => 'Veggie Pizza',
                 'image' => $photos[0],
             ],
             [
-                'title' => 'BBQ Pizza',
-                'price' => 130,
-                'description' => 'BBQ Pizza',
+                'title' => 'Special Meat Pizza',
+                'price' => 100,
+                'description' => 'MEAT Pizza',
                 'image' => $photos[1],
             ],
 
             [
-                'title' => 'Special Meat',
-                'price' => 160,
-                'description' => 'Special Meat',
+                'title' => 'VIP Meat',
+                'price' => 90,
+                'description' => 'VIP Meat',
                 'image' => $photos[2],
             ],
 
@@ -44,8 +44,8 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'title' => 'Fri Chicks Special With Burger',
-                'price' => 30,
+                'title' => 'Fri Chicks & Burger',
+                'price' => 20,
                 'description' => 'fri chicks',
                 'image' => $photos[4],
             ],
@@ -58,42 +58,42 @@ class ProductSeeder extends Seeder
             ],
 
             [
-                'title' => 'Chicken Curry Fri',
+                'title' => 'Chicken Curry',
                 'price' => 130,
                 'description' => 'chicken curry',
                 'image' => $photos[6],
             ],
 
             [
-                'title' => 'Butter Pizza',
+                'title' => 'Special Butter Pizza',
                 'price' => 90,
-                'description' => 'Butter Pizza',
+                'description' => 'Pizza',
                 'image' => $photos[7],
             ],
 
             [
-                'title' => 'Butter Chicken',
+                'title' => 'Special Chicken',
                 'price' => 70,
                 'description' => 'Chicken',
                 'image' => $photos[8],
             ],
 
             [
-                'title' => 'Chicken Burger',
+                'title' => 'Spicy Chicken Burger',
                 'price' => 110,
                 'description' => 'Burger Chicken',
                 'image' => $photos[9],
             ],
 
             [
-                'title' => 'KFC Burger',
+                'title' => 'KMW Burger',
                 'price' => 100,
-                'description' => 'Large Pizza',
+                'description' => 'Burger',
                 'image' => $photos[10],
             ],
             [
-                'title' => 'Beef Curry',
-                'price' => 190,
+                'title' => 'Beef Meat',
+                'price' => 130,
                 'description' => 'Beef',
                 'image' => $photos[11],
             ],
