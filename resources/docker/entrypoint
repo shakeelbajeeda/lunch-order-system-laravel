@@ -1,3 +1,2 @@
-php artisan sitemap:generate
 php-fpm -F &
 nginx -g 'daemon off;'
