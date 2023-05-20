@@ -12,11 +12,16 @@ class TradingHistoryExport implements FromView
     {
         return view('dashboard.export', [
             'orders' => Order::with([
-                'user',
+                'seller',
+                'buyer',
                 'renewableEnergy',
                 'renewableEnergy.renewableEnergyType',
                 'renewableEnergy.user'
-            ])->get()
+            ])->when(auth()->user()->user_type == 'seller', function ($query) {
+                return $query->whereSellerId(auth()->user()->id);
+                })->when(auth()->user()->user_type == 'buyer', function ($query) {
+                return $query->whereBuyerId(auth()->user()->id);
+                })->get()
         ]);
     }
 }

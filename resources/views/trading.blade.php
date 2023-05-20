@@ -13,12 +13,14 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Seller Name</th>
+                        <th scope="col">Seller</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Energy Type</th>
-                        <th scope="col">Net Volume</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Volume</th>
                         <th scope="col">Zone</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Tax</th>
+                        <th scope="col">Administration Fee</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -31,10 +33,12 @@
                             <td class="text-capitalize">{{ $item->renewableEnergyType->energy_type }}</td>
                             <td>{{ $item->volume }} kWh</td>
                             <td>{{ $item->user->zone }}</td>
-                            <td class="fw-bold text-success">${{ $item->price }}</td>
+                            <td class="fw-bold">${{ $item->price }}</td>
+                            <td class="fw-bold">${{ $item->renewableEnergyType->tax }}</td>
+                            <td class="fw-bold">${{ $item->renewableEnergyType->administration_fee }}</td>
                             <td>
-                                <button onclick="getItem({{ $item }})" class="btn btn-outline-secondary w-100" data-bs-toggle="modal"
-                                        data-bs-target="#buyModal">Buy</button></td>
+                                <button onclick="getItem({{ $item }})" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                                        data-bs-target="#buyModal">Purchase</button></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -48,8 +52,8 @@
          data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h1 class="modal-title fs-5" id="buyModalLabel">Purchase Details</h1>
+                <div class="modal-header bg-success text-white">
+                    <h1 class="modal-title fs-5" id="buyModalLabel">Purchase Available Volume</h1>
                 </div>
                 <form action="{{ route('order.index') }}" method="post">
                     @csrf
@@ -57,29 +61,21 @@
                         <label for="zone" class="form-label w-100">Volume
                             <div class="input-group mb-3 w-100 mt-2">
                                 <input type="hidden" id="renewable-energy-id" name="renewable_energy_id">
-                                <input id="volume" onkeyup="updatePrice(this.value)" type="number" name="volume" class="form-control" placeholder="25" aria-label="volume"
+                                <input id="volume" onkeyup="updatePrice(this.value)" type="number" name="volume" class="form-control" placeholder="e.g, 100" aria-label="volume"
                                        aria-describedby="kwh-addon" required>
-                                <span class="input-group-text" id="kwh-addon">kWh</span>
                             </div>
-                            <div id="volume-error" class="d-none text-danger">The volume cannot greater than available energy volume</div>
+                            <div id="volume-error" class="d-none text-danger">Volume Limit Exceeds</div>
                         </label>
-                        <label for="zone" class="form-label w-100">Payable Amount
-                            <div class="input-group mb-3 w-100 mt-2">
-                                <span class="input-group-text" id="kwh-addon">$</span>
-                                <input id="payable-amount" readonly type="text" class="form-control" placeholder="0">
-                            </div>
-                        </label>
-                        The Administration Fee and Tax automatically added.
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-dark" id="submit-btn">Confirm Purchase</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-outline-success" id="submit-btn">Pay <span id="payable-amount"></span></button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         let renewable_energy = null;
         function updatePrice (value) {
             if(value) {
@@ -93,48 +89,35 @@
                 if (value > 0) {
                     let amount = renewable_energy.price * value;
                     amount += Number(renewable_energy.renewable_energy_type.administration_fee) + Number(renewable_energy.renewable_energy_type.tax);
-                    document.getElementById('payable-amount').value = amount;
+                    document.getElementById('payable-amount').innerHTML = '($'+amount+')';
                 }
             } else {
-                document.getElementById('payable-amount').value = 0;
+                document.getElementById('payable-amount').innerHTML = '($0)';
             }
         }
 
         function getItem(item) {
             renewable_energy = item;
             document.getElementById('renewable-energy-id').value = item.id;
-            document.getElementById('payable-amount').value = null;
+            document.getElementById('payable-amount').innerHTML = '($0)';
             document.getElementById('volume').value = null;
             document.getElementById('submit-btn').classList.remove('disabled');
             document.getElementById('volume-error').classList.add('d-none');
         }
 
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
         @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
         @endif
         @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
+        Swal.fire({
             icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
         @endif
     </script>
 @endsection

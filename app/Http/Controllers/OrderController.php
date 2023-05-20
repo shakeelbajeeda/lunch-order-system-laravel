@@ -46,7 +46,7 @@ class OrderController extends Controller
         $renewable_energy = RenewableEnergy::whereId($request->renewable_energy_id)->with(['renewableEnergyType', 'user'])->first();
 
         if (auth()->user()->user_type == 'seller') {
-            return redirect('/trading')->with(['error' => "Sorry you'r seller not buyer!"]);
+            return redirect('/trading')->with(['error' => "Sorry you are not a buyer!"]);
         }
 
         if (!auth()->user()->is_active) {
@@ -61,7 +61,7 @@ class OrderController extends Controller
             if ($request->volume <= $renewable_energy->volume) {
                 $amount = ($request->volume * $renewable_energy->price) + $renewable_energy->renewableEnergyType->tax + $renewable_energy->renewableEnergyType->administration_fee;
                 if (auth()->user()->balance < $amount) {
-                    return redirect('/trading')->with(['error' => "You don't have enough balance to buy this energy!"]);
+                    return redirect('/trading')->with(['error' => "You do not have enough balance to buy this energy!"]);
                 }
 
                 Order::create([

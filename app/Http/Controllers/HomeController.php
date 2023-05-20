@@ -68,7 +68,8 @@ class HomeController extends Controller
     public function tradingHistory()
     {
         $orders = Order::with([
-            'user',
+            'seller',
+            'buyer',
             'renewableEnergy',
             'renewableEnergy.renewableEnergyType',
             'renewableEnergy.user'

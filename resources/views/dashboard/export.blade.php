@@ -27,10 +27,10 @@
         <tbody>
         @foreach($orders as $order)
             <tr>
-                <td class="align-middle text-capitalize">{{ $order->user->name }}</td>
-                <td class="align-middle">{{ $order->renewableEnergy->user->name }}</td>
+                <td class="align-middle text-capitalize">{{ $order->buyer->name }}</td>
+                <td class="align-middle">{{ $order->seller->name }}</td>
                 <td class="align-middle text-capitalize">{{ $order->renewableEnergy->renewableEnergyType->energy_type }}</td>
-                <td class="align-middle">{{ $order->user->zone }}</td>
+                <td class="align-middle">{{ $order->seller->zone }}</td>
                 <td class="align-middle">{{ $order->volume }} KWH</td>
                 <td class="align-middle">${{ $order->price }}</td>
                 <td class="align-middle">{{ date('d M, Y', strtotime($order->created_at)) }}</td>

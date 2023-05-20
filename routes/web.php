@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/website', 'website.index');
+
+
 Route::get('/', [\App\Http\Controllers\RenewableEnergyTypeController::class, 'getEnergyTypes']);
 Route::view('/master-trading', 'master_trading');
 
@@ -38,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/profile', 'dashboard.profile.profile');
 
 });
+
 
 
 Route::get('/trading', [\App\Http\Controllers\RenewableEnergyController::class, 'getRenewableEnergies'])->name('trading');

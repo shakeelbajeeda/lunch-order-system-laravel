@@ -10,7 +10,7 @@
                             @csrf
                             <div
                                 class="text-center py-4 bg-white shadow p-4 rounded card">
-                                <h1 class="h3 my-3 text-dark">Log In</h1>
+                                <h1 class="h3 my-3 text-success">Log In</h1>
                                 <div class="mt-3 px-3">
                                     <input name="email" type="email" value="{{ old('email') }}"
                                            class="form-control @error('email') is-invalid @enderror"
@@ -25,8 +25,6 @@
                                 <div class="mt-3 px-3 input-group">
                                     <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"
                                            required>
-                                    <span class="input-group-text"><i id="eye-icon"
-                                                                      class="fa fa-eye-slash cursor-pointer"></i></span>
                                     @error('password')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -35,12 +33,12 @@
                                 </div>
 
                                 <div class="mt-4 small text-secondary">
-                                    Dont' have an account?
-                                    <a href="{{ route('register') }}" class="text-decoration-none">Sign Up</a>
+                                    If You Don't Have An Account?
+                                    <a href="{{ route('register') }}" class="text-decoration-none">Register</a>
                                 </div>
 
-                                <div class="mt-2 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-outline-dark w-75 ">
+                                <div class="mt-2 col-md-12">
+                                    <button type="submit" class="btn btn-outline-success btn-block">
                                         Log In
                                     </button>
                                 </div>
