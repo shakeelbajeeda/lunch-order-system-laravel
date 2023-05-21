@@ -33,11 +33,11 @@
         <!-- Trading History Chart -->
         <div class="card shadow my-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Energy Traded over time</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Traded Energy</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
-                    <canvas id="trading_history_graph"></canvas>
+                    <canvas id="trading-history"></canvas>
                 </div>
             </div>
         </div>
@@ -45,11 +45,11 @@
         <!-- Trade Price Chart -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Trading price changed over time</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Market Prices</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
-                    <canvas id="trade_price_graph"></canvas>
+                    <canvas id="market-price-change"></canvas>
                 </div>
             </div>
         </div>
@@ -82,18 +82,10 @@
                                 prices_datasets[findIndex].data.push(h.price);
                             } else {
                                 let obj = {
-                                    label: h.type ,
-                                    lineTension: 0.3,
-                                    backgroundColor: `rgba(78, 115, 223, 0.${index})`,
-                                    borderColor: "rgba(78, 115, 223, 1)",
-                                    pointRadius: 3,
-                                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                                    pointHoverRadius: 3,
-                                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                                    pointHitRadius: 10,
-                                    pointBorderWidth: 2,
+                                    label: h.type,
+                                    backgroundColor: `#4e${index}3df`,
+                                    hoverBackgroundColor: `#2e${index}9d9`,
+                                    borderColor: `#4e${index}3df`,
                                     data: [],
                                 }
                                 obj.data.push(h.price)
@@ -101,18 +93,10 @@
                             }
                         } else {
                             let obj = {
-                                label: h.type ,
-                                lineTension: 0.3,
-                                backgroundColor: "rgba(78, 115, 223, 0.05)",
-                                borderColor: "rgba(78, 115, 223, 1)",
-                                pointRadius: 3,
-                                pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                                pointBorderColor: "rgba(78, 115, 223, 1)",
-                                pointHoverRadius: 3,
-                                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                                pointHitRadius: 10,
-                                pointBorderWidth: 2,
+                                label: h.type,
+                                backgroundColor: `#4e${index}3df`,
+                                hoverBackgroundColor: `#2e5${index}d9`,
+                                borderColor: `#4e7${index}df`,
                                 data: [],
                             }
                             obj.data.push(h.price)
@@ -123,27 +107,17 @@
             })
         }
 
-        console.log(prices_datasets)
-
         // Trading History Graph
-        var ctx = document.getElementById("trading_history_graph");
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
+        var ctx = document.getElementById("trading-history");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
             data: {
                 labels: dates,
                 datasets: [{
-                    label: "Earnings",
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(78, 115, 223, 0.05)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
+                    label: "Traded Amount",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
                     data: earnings,
                 }],
             },
@@ -160,22 +134,23 @@
                 scales: {
                     xAxes: [{
                         time: {
-                            unit: 'date'
+                            unit: 'month'
                         },
                         gridLines: {
                             display: false,
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 7
-                        }
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
                     }],
                     yAxes: [{
                         ticks: {
-                            maxTicksLimit: 5,
+                            maxTicksLimit: 8,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function (value, index, values) {
+                            callback: function(value, index, values) {
                                 return '$' + number_format(value);
                             }
                         },
@@ -192,36 +167,34 @@
                     display: false
                 },
                 tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
                     titleMarginBottom: 10,
                     titleFontColor: '#6e707e',
                     titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
                     borderColor: '#dddfeb',
                     borderWidth: 1,
                     xPadding: 15,
                     yPadding: 15,
                     displayColors: false,
-                    intersect: false,
-                    mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function (tooltipItem, chart) {
+                        label: function(tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                         }
                     }
-                }
+                },
             }
         });
 
 
         // Trade Price Graph
-        var ctx = document.getElementById("trade_price_graph");
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
+        var ctx = document.getElementById("market-price-change");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
             data: {
-                labels: price_dates,
+                labels: dates,
                 datasets: prices_datasets,
             },
             options: {
@@ -237,22 +210,23 @@
                 scales: {
                     xAxes: [{
                         time: {
-                            unit: 'date'
+                            unit: 'month'
                         },
                         gridLines: {
                             display: false,
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 7
-                        }
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
                     }],
                     yAxes: [{
                         ticks: {
-                            maxTicksLimit: 5,
+                            maxTicksLimit: 8,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function (value, index, values) {
+                            callback: function(value, index, values) {
                                 return '$' + number_format(value);
                             }
                         },
@@ -269,26 +243,24 @@
                     display: false
                 },
                 tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
                     titleMarginBottom: 10,
                     titleFontColor: '#6e707e',
                     titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
                     borderColor: '#dddfeb',
                     borderWidth: 1,
                     xPadding: 15,
                     yPadding: 15,
                     displayColors: false,
-                    intersect: false,
-                    mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function (tooltipItem, chart) {
+                        label: function(tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                         }
                     }
-                }
+                },
             }
         });
     </script>

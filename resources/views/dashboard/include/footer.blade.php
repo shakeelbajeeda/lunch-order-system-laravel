@@ -29,7 +29,7 @@
 
  <!-- Custom scripts for all pages-->
  <script src="{{ asset('dashboard/dashboard-js/sb-admin-2.min.js') }}"></script>
- <script src="{{ asset('dashboard/dashboard-js/demo/chart-area-demo.js') }}"></script>
+ <script src="{{ asset('dashboard/dashboard-js/demo/chart-bar-demo.js') }}"></script>
 
  <script src="{{ asset('dashboard/dashboard-vendor/datatables/jquery.dataTables.min.js') }}"></script>
  <script src="{{ asset('dashboard/dashboard-vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
