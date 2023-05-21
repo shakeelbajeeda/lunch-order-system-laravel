@@ -56,33 +56,7 @@
                             <a class="ml-3 btn btn-outline-primary"
                                href="{{ route('users.edit', $user->id) }}"><i class="fa fa-edit"></i></a>
                             <form action="{{ route('users.destroy', $user->id) }}" method="post" >
-                                @    var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
-        @endif
-        @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
-            icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
-        @endifcsrf
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i></button>
                             </form>
