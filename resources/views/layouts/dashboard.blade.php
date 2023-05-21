@@ -18,10 +18,19 @@
         rel="stylesheet">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../pages/images/small-icon.png">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('dashboard/dashboard-css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <style>
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: inset 0 1px 1px #28a745, 0 0 8px #28a745;
+        }
+    </style>
 </head>
 
 <body id="page-top">

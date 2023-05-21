@@ -2,14 +2,14 @@
 @section('content')
     <div class="container">
         <section class="p-3 ">
-            <h1 class="h2  text-center text-dark pt-4">Renewable Energies List</h1>
+            <h1 class="h2  text-center text-dark pt-4">Renewable Energies</h1>
             @if(!empty($_GET['energy_type']) || !empty($_GET['zone']))
                 <div class="text-center">
                     <a href="{{ route('trading') }}" class="btn btn-primary">Reset Search</a>
                 </div>
             @endif
-            <div class="energies mt-4 table-responsive pt-3">
-                <table class="table table-hover">
+            <div class="energies mt-4 table-responsive bg-success pt-3">
+                <table class="table table-hover text-white">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -37,7 +37,7 @@
                             <td class="fw-bold">${{ $item->renewableEnergyType->tax }}</td>
                             <td class="fw-bold">${{ $item->renewableEnergyType->administration_fee }}</td>
                             <td>
-                                <button onclick="getItem({{ $item }})" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                                <button onclick="getItem({{ $item }})" class="btn btn-outline-primary w-100" data-bs-toggle="modal"
                                         data-bs-target="#buyModal">Purchase</button></td>
                         </tr>
                     @endforeach

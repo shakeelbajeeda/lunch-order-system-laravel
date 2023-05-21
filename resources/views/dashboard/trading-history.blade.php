@@ -16,16 +16,17 @@
         }
     </style>
     <div class="container">
-        <div class="py-3 text-center h2">
-            Trading History <br>
+        <div class="py-3 text-center h2 text-success">
+            Trade History <br>
             @if(count($orders) > 0)
-            <a href="{{ route('export-history') }}" class="btn btn-primary mt-3"><i class="fa fa-file-export mr-2"></i>Export Excel</a>
+            <a href="{{ route('export-history') }}" class="btn btn-outline-success mt-3"><i class="fa fa-file-export mr-2"></i>Export In Excel File</a>
             @endif
         </div>
-        <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive bg-success">
+            <table id="dtHorizontalExample" class="table text-white table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Buyer Name</th>
                     <th>Seller Name</th>
                     <th>Energy Type</th>
@@ -36,8 +37,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($orders as $order)
+                @foreach($orders as $key => $order)
                     <tr>
+                        <td class="align-middle text-capitalize">{{ $key + 1 }}</td>
                         <td class="align-middle text-capitalize">{{ $order->buyer->name }}</td>
                         <td class="align-middle">{{ $order->seller->name }}</td>
                         <td class="align-middle text-capitalize">{{ $order->renewableEnergy->renewableEnergyType->energy_type }}</td>
@@ -54,32 +56,19 @@
 @endsection
 @section('scripts')
     <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
         @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
         @endif
         @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
+        Swal.fire({
             icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
         @endif
     </script>
 @endsection

@@ -16,16 +16,17 @@
         }
     </style>
     <div class="container">
-        <div class="py-3 text-center h2">
-            Renewable Energies List
+        <div class="py-3 text-center h2 text-success">
+            Renewable Energies
         </div>
         <div class="pt-3 pb-5">
-            <a href="{{ route('renewable-energies.create') }}" class="btn btn-dark">+ Add New</a>
+            <a href="{{ route('renewable-energies.create') }}" class="btn btn-outline-success">+ Add New</a>
         </div>
-        <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive bg-success rounded">
+            <table id="dtHorizontalExample" class="table text-white table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Energy Type</th>
                     <th>Volume</th>
                     <th>Price</th>
@@ -33,18 +34,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($renewable_energies as $item)
+                @foreach($renewable_energies as $key => $item)
                     <tr>
+                        <td class="align-middle">{{ $key + 1 }}</td>
                         <td class="align-middle text-capitalize">{{ $item->renewableEnergyType->energy_type }}</td>
-                        <td class="align-middle">{{ round($item->volume) }}KWH</td>
+                        <td class="align-middle">{{ round($item->volume) }} KWH</td>
                         <td class="align-middle">${{ $item->price }}</td>
                         <td class="align-middle d-flex">
-                            <a class="ml-3 btn btn-info"
+                            <a class="ml-3 btn btn-outline-primary"
                                href="{{ route('renewable-energies.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
                             <form id="delete-form" action="{{ route('renewable-energies.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger ml-3"><i class="fa fa-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -56,32 +58,19 @@
 @endsection
 @section('scripts')
     <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
         @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
         @endif
         @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
+        Swal.fire({
             icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
         @endif
     </script>
 @endsection

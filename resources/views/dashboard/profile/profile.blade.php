@@ -90,7 +90,7 @@
             margin-bottom: 10px;
         }
 
-        .text-muted {
+        . {
             color: #919aa3 !important;
         }
 
@@ -137,59 +137,57 @@
 
     </style>
     <div class="page-content page-container" id="page-content">
-        <div class="text-center h1"> My Profile</div>
+        <div class="text-center h1 text-success"> My Profile</div>
         <div class="padding">
             <div class="row container d-flex justify-content-center">
                 <div class="col-xl-8 col-md-12">
-                    <div class="card user-card-full">
+                    <div class="card user-card-full bg-success text-white">
                         <div class="row m-l-0 m-r-0">
-                            <div class="col-sm-4 bg-c-lite-green user-profile">
-                                <div class="card-block text-center text-white">
-                                    <div class="m-b-25">
-                                        <i class="fa fa-user fa-3x"></i>
-                                    </div>
-                                    <h6 class="f-w-600">{{ auth()->user()->name }}</h6>
-                                    <p>({{ ucwords(str_replace('_', ' ', auth()->user()->user_type)) }})</p>
-                                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                </div>
-                            </div>
                             <div class="col-sm-8">
                                 <div class="card-block">
-                                    <h3 class="m-b-20 p-b-5 b-b-default f-w-600 text-dark">Information</h3>
+                                    <h3 class="m-b-20 p-b-5 b-b-default f-w-600 ">Information</h3>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <p class="m-b-10 f-w-600 text-dark">Email</p>
-                                            <h6 class="text-muted f-w-400">{{ auth()->user()->email }}</h6>
+                                            <h5 class="m-b-10 f-w-600 mt-2">Name</h5>
+                                            <h6 class=" f-w-400">{{ auth()->user()->name }}</h6>
                                         </div>
                                         <div class="col-sm-12">
-                                            <p class="m-b-10 f-w-600 text-dark">Status</p>
-                                            <span class="badge badge-pill {{ auth()->user()->is_active ? 'badge-success' : 'badge-danger' }}">
+                                            <h5 class="m-b-10 f-w-600 mt-2">User Type</h5>
+                                            <h6 class=" f-w-400">{{ ucwords(str_replace('_', ' ', auth()->user()->user_type)) }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <h5 class="m-b-10 f-w-600 ">Email</h5>
+                                            <h6 class=" f-w-400">{{ auth()->user()->email }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <h5 class="m-b-10 f-w-600 ">Status</h5>
+                                            <span class="badge {{ auth()->user()->is_active ? 'badge-primary' : 'badge-danger' }}">
                                                 {{ auth()->user()->is_active == 1 ? 'Activated' : 'Inactivated' }}
                                             </span>
                                         </div>
                                         <div class="col-sm-12 pt-2">
-                                            <p class="m-b-10 f-w-600 text-dark">Address</p>
-                                            <h6 class="text-muted f-w-400">{{ auth()->user()->address }}</h6>
+                                            <h5 class="m-b-10 f-w-600 ">Address</h5>
+                                            <h6 class=" f-w-400">{{ auth()->user()->address }}</h6>
                                         </div>
                                         <div class="col-sm-12 pt-2">
-                                            <p class="m-b-10 f-w-600 text-dark">Zone</p>
-                                            <h6 class="text-muted f-w-400">{{ auth()->user()->zone }}</h6>
+                                            <h5 class="m-b-10 f-w-600 ">Zone</h5>
+                                            <h6 class=" f-w-400">{{ auth()->user()->zone }}</h6>
                                         </div>
                                         <div class="col-sm-12 pt-2">
-                                            <h3 class="m-b-10 f-w-600 text-dark">Account Balance</h3>
-                                            <h4 class="f-w-400 text-muted text-light">
+                                            <h3 class="m-b-10 f-w-600 ">Account Balance</h3>
+                                            <h4 class="f-w-400  text-light">
                                                 ${{ auth()->user()->balance }}
                                             </h4>
                                         </div>
                                     </div>
-                                    <h3 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 text-dark">Actions</h3>
+                                    <h3 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 ">Actions</h3>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <a class="btn btn-primary btn-block" href="{{ url('/update-profile') }}">Edit Profile</a>
+                                            <a class="btn btn-outline-primary btn-block" href="{{ url('/update-profile') }}">Edit Profile</a>
                                         </div>
                                         @if(auth()->user()->user_type == 'buyer')
                                             <div class="col-sm-6">
-                                                <a class="btn btn-primary btn-block" href="{{ url('/deposit-fund') }}">Deposit Fund</a>
+                                                <a class="btn btn-outline-primary btn-block" href="{{ url('/deposit-fund') }}">Deposit Fund</a>
                                             </div>
                                         @endif
                                     </div>
@@ -204,32 +202,19 @@
 @endsection
 @section('scripts')
     <script>
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
         @if (session()->has('message'))
-        toastMixin.fire({
-            animation: true,
-            title: '{{ session()->get('message') }}'
-        });
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
         @endif
         @if (session()->has('error'))
-        toastMixin.fire({
-            animation: true,
+        Swal.fire({
             icon: 'error',
-            title: '{{ session()->get('error') }}'
-        });
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
         @endif
     </script>
 @endsection

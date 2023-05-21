@@ -2,10 +2,10 @@
 @section('content')
     <div class="container">
         @if(auth()->user()->user_type !== 'service_manager')
-        <div class="py-3 text-center h2">
-            All Energy Market Prices
+        <div class="py-3 text-center h2 text-success">
+            Market Price List
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive table-success table-striped">
             <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0"
                    width="100%">
                 <thead>
@@ -32,8 +32,8 @@
 
         <!-- Trading History Chart -->
         <div class="card shadow my-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Traded Energy</h6>
+            <div class="card-header py-3 bg-success">
+                <h6 class="m-0 font-weight-bold text-white">Traded Energy</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -44,8 +44,8 @@
 
         <!-- Trade Price Chart -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Market Prices</h6>
+            <div class="card-header py-3 bg-success">
+                <h6 class="m-0 font-weight-bold text-white">Market Prices</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -83,9 +83,9 @@
                             } else {
                                 let obj = {
                                     label: h.type,
-                                    backgroundColor: `#4e${index}3df`,
-                                    hoverBackgroundColor: `#2e${index}9d9`,
-                                    borderColor: `#4e${index}3df`,
+                                    backgroundColor: '#4CAF50',
+                                    hoverBackgroundColor: '#4CAF50',
+                                    borderColor: '#4CAF50',
                                     data: [],
                                 }
                                 obj.data.push(h.price)
@@ -94,9 +94,9 @@
                         } else {
                             let obj = {
                                 label: h.type,
-                                backgroundColor: `#4e${index}3df`,
-                                hoverBackgroundColor: `#2e5${index}d9`,
-                                borderColor: `#4e7${index}df`,
+                                backgroundColor: '#4CAF50',
+                                hoverBackgroundColor: '#4CAF50',
+                                borderColor: '#4CAF50',
                                 data: [],
                             }
                             obj.data.push(h.price)
@@ -115,9 +115,9 @@
                 labels: dates,
                 datasets: [{
                     label: "Traded Amount",
-                    backgroundColor: "#4e73df",
-                    hoverBackgroundColor: "#2e59d9",
-                    borderColor: "#4e73df",
+                    backgroundColor: "#4CAF50",
+                    hoverBackgroundColor: "#4CAF50",
+                    borderColor: "#4CAF50",
                     data: earnings,
                 }],
             },

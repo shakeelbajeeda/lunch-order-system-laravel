@@ -16,16 +16,17 @@
         }
     </style>
     <div class="container">
-        <div class="py-3 text-center h2">
+        <div class="py-3 text-center text-success h2">
             Users Management
         </div>
         <div class="pt-3 pb-5">
-            <a href="{{ route('users.create') }}" class="btn btn-dark">+ Add New</a>
+            <a href="{{ route('users.create') }}" class="btn btn-outline-success">+ Add New User</a>
         </div>
-        <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive bg-success rounded">
+            <table id="dtHorizontalExample" class="table text-white table-bordered table-striped table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
@@ -37,8 +38,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @foreach($users as $key => $user)
                     <tr>
+                        <td class="align-middle">{{ $key + 1 }}</td>
                         <td class="align-middle text-capitalize">{{ $user->name }}</td>
                         <td class="align-middle">{{ $user->email }}</td>
                         <td class="align-middle">{{ $user->address }}</td>
@@ -46,29 +48,15 @@
                         <td class="align-middle">${{ $user->balance }}</td>
                         <td class="align-middle">{{ $user->user_type }}</td>
                         <td class="align-middle">
-                            <span class="badge badge-pill {{ $user->is_active ? 'badge-success' : 'badge-danger' }}">
+                            <span class="badge {{ $user->is_active ? 'badge-primary' : 'badge-danger' }}">
                             {{ $user->is_active == 1 ? 'Activated' : 'Inactivated' }}
                             </span>
                         </td>
                         <td class="align-middle d-flex">
-                            <a class="ml-3 btn btn-info"
+                            <a class="ml-3 btn btn-outline-primary"
                                href="{{ route('users.edit', $user->id) }}"><i class="fa fa-edit"></i></a>
                             <form action="{{ route('users.destroy', $user->id) }}" method="post" >
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger ml-3"><i class="fa fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div><br>
-@endsection
-@section('scripts')
-    <script>
-        var toastMixin = Swal.mixin({
+                                @    var toastMixin = Swal.mixin({
             toast: true,
             icon: 'success',
             title: 'General Title',
@@ -94,6 +82,33 @@
             icon: 'error',
             title: '{{ session()->get('error') }}'
         });
+        @endifcsrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div><br>
+@endsection
+@section('scripts')
+    <script>
+        @if (session()->has('message'))
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
+        @endif
+        @if (session()->has('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
         @endif
     </script>
 @endsection

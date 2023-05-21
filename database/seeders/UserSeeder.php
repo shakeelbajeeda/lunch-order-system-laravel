@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         User::insert([
            [
                'id' => 1,
-               'name' => 'Service Manager',
-               'email' => 'servicemanager@taget.com',
+               'name' => 'Atif Service Manager',
+               'email' => 'atif@servicemanager.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'service_manager',
                'address' => 'Hobart',
@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
            ],
            [
                'id' => 2,
-               'name' => 'Taget Seller',
-               'email' => 'seller@taget.com',
+               'name' => 'Atif Seller',
+               'email' => 'atif@seller.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'seller',
                'address' => 'Hobart',
@@ -37,8 +37,8 @@ class UserSeeder extends Seeder
            ],
            [
                'id' => 3,
-               'name' => 'Taget Buyer',
-               'email' => 'buyer@taget.com',
+               'name' => 'Atif Buyer',
+               'email' => 'atif@buyer.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'buyer',
                'address' => 'Hobart',
