@@ -9,6 +9,13 @@
             <div class="slide-content">
                 <h1>Tassie Green Energy Trading Company (TaGET)</h1>
                 <p>Tasmanias trusted energy trading company</p>
+                <div class="card bg-white p-3">
+                    <form class="form-inline my-2 my-lg-0" action="{{ route('trading') }}" method="get">
+                        <input class="form-control mr-sm-2 col-md-8" type="text" name="search" placeholder="Search by type or zone"
+                               aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0 col-md-3" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

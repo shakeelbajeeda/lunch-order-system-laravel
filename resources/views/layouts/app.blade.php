@@ -61,11 +61,6 @@
                 <a class="nav-link" href="{{ url('/profile') }}"><strong>Profile</strong></a>
             </li>
         </ul>
-{{--        <form class="form-inline my-2 my-lg-0" action="{{ route('trading') }}" method="get">--}}
-{{--            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search by type or zone"--}}
-{{--                   aria-label="Search">--}}
-{{--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
-{{--        </form>--}}
     </div>
     <!-- Login and Signup section -->
     <!-- Right Side Of Navbar -->
