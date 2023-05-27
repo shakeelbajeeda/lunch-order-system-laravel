@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         @if(auth()->user()->user_type !== 'service_manager')

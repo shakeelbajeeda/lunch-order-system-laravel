@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::insert([
+        User::upsert([
            [
                'id' => 1,
-               'name' => 'Atif Service Manager',
-               'email' => 'atif@servicemanager.com',
+               'name' => 'Service Manager',
+               'email' => 'divya@servicemanager.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'service_manager',
                'address' => 'Hobart',
@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
            ],
            [
                'id' => 2,
-               'name' => 'Atif Seller',
-               'email' => 'atif@seller.com',
+               'name' => 'Aukins Seller',
+               'email' => 'aukins@seller.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'seller',
                'address' => 'Hobart',
@@ -37,13 +37,22 @@ class UserSeeder extends Seeder
            ],
            [
                'id' => 3,
-               'name' => 'Atif Buyer',
-               'email' => 'atif@buyer.com',
+               'name' => 'Gayani Buyer',
+               'email' => 'gayani@buyer.com',
                'password' => Hash::make('12345678'),
                'user_type' => 'buyer',
                'address' => 'Hobart',
                'zone' => 'A',
            ],
+            [
+                'id' => 4,
+                'name' => 'Ramandeep Buyer',
+                'email' => 'ramandeep@buyer.com',
+                'password' => Hash::make('12345678'),
+                'user_type' => 'buyer',
+                'address' => 'Hobart',
+                'zone' => 'A',
+            ],
         ],['id', 'email']);
     }
 }
