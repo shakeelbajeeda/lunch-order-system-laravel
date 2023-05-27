@@ -1,7 +1,7 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 @section('content')
 <div class="container" style="padding-bottom: 250px;">
-    <div class="h1  text-success text-center">{{ @$renewableEnergy ? 'Edit' : 'Add' }} Renewable Energy</div>
+    <div class="h1  text-success text-center">{{ @$renewableEnergy ? 'Edit' : 'Add' }} Energy</div>
     <form method="post" action="{{ @$renewableEnergy ? route('renewable-energies.update', @$renewableEnergy->id): route('renewable-energies.store') }}" class="my-5" >
         @csrf
         @if(@$renewableEnergy)
@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="mt-4">
-                    <label for="energy_type" class="text-success">Select Energy Type</label>
+                    <label for="energy_type">Select Energy Type</label>
                     <select class="form-control @error('renewable_energy_type_id') is-invalid @enderror" name="renewable_energy_type_id">
                         @if(!@$renewableEnergy)
                             <option  value="" selected> Select Energy Type </option>
@@ -26,7 +26,7 @@
                     @enderror
                 </div>
                 <div class="mt-4">
-                    <label for="volume" class="text-success">Available Volume</label>
+                    <label for="volume">Available Volume</label>
                     <input type="number" name="volume" class="form-control @error('volume') is-invalid @enderror"
                            value="{{ @$renewableEnergy ? @$renewableEnergy->volume : old('volume') }}" placeholder="Volume">
                     @error('volume')
@@ -36,7 +36,7 @@
                     @enderror
                 </div>
                 <div class="mt-4">
-                    <label for="energy_type" class="text-success">Price</label>
+                    <label for="energy_type">Price</label>
                     <input type="number" name="price" class="form-control @error('price') is-invalid @enderror"
                            value="{{ @$renewableEnergy ? @$renewableEnergy->price : old('price') }}" placeholder="Price">
                     @error('price')
@@ -46,10 +46,10 @@
                     @enderror
                 </div>
                 <div class="col-md-12 text-center mt-4">
-                    <a href="{{ route('renewable-energies.index') }}" class="btn-block px-5 fs-2 btn btn-outline-danger">
+                    <a href="{{ route('renewable-energies.index') }}" class="btn-block px-5 btn btn-outline-danger">
                         Cancel
                     </a>
-                    <button type="submit" class="px-5 fs-2 btn btn-outline-success btn-block">
+                    <button type="submit" class="px-5 btn btn-outline-success btn-block">
                         {{ @$renewableEnergy ? 'Update' : 'Submit' }}
                     </button>
                 </div>

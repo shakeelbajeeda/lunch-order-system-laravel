@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 @section('content')
     <style>
         .table-responsive1 {
@@ -16,14 +16,30 @@
         }
     </style>
     <div class="container">
+        @if(session('error'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ session('error') }}</strong>.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session('message') }}</strong>.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="py-3 text-center h2 text-success">
             Master Trading
         </div>
-        <div class="pt-3 pb-5">
-            <a href="{{ route('renewable-energy-type.create') }}" class="btn btn-outline-success">+ Add New</a>
+        <div class="pt-3 pb-5 text-center">
+            <a href="{{ route('renewable-energy-type.create') }}" class="btn btn-outline-success">+ Add New Energy Type</a>
         </div>
-        <div class="table-responsive rounded bg-success">
-            <table id="dtHorizontalExample" class="table table-bordered table-striped text-white table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive rounded">
+            <table id="dtHorizontalExample" class="table table-bordered table-striped table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -43,12 +59,12 @@
                         <td class="align-middle">${{ $item->administration_fee }}</td>
                         <td class="align-middle">${{ $item->tax }}</td>
                         <td class="align-middle d-flex">
-                            <a class="ml-3 btn btn-outline-primary"
-                               href="{{ route('renewable-energy-type.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
+                            <a class="ml-3 btn btn-outline-info"
+                               href="{{ route('renewable-energy-type.edit', $item->id) }}">Edit</a>
                             <form id="delete-form" action="{{ route('renewable-energy-type.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger ml-3">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -57,22 +73,4 @@
             </table>
         </div>
     </div><br>
-@endsection
-@section('scripts')
-    <script>
-        @if (session()->has('message'))
-        Swal.fire(
-            'Good job!',
-            '{{ session()->get('message') }}',
-            'success'
-        )
-        @endif
-        @if (session()->has('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `{{ session()->get('error') }}`,
-        })
-        @endif
-    </script>
 @endsection

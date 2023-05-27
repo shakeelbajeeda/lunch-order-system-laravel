@@ -40,20 +40,32 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/trading') }}"><strong>Trading</strong></a>
             </li>
-
+            @if(auth()->check() && auth()->user()->user_type == 'seller' || auth()->user()->user_type == 'service_manager')
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/update-profile') }}"><strong>Profile</strong></a>
+                <a class="nav-link" href="{{ url('/renewable-energies') }}"><strong>Sell Energy</strong></a>
             </li>
-
+            @endif
+            @if(auth()->check() && auth()->user()->user_type == 'service_manager')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/renewable-energy-type') }}"><strong>Master Trading</strong></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/users') }}"><strong>User Management</strong></a>
+            </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/trading-history') }}"><strong>Trading History</strong></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/profile') }}"><strong>Profile</strong></a>
+            </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="{{ route('trading') }}" method="get">
-            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search by type or zone"
-                   aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+{{--        <form class="form-inline my-2 my-lg-0" action="{{ route('trading') }}" method="get">--}}
+{{--            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search by type or zone"--}}
+{{--                   aria-label="Search">--}}
+{{--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
+{{--        </form>--}}
     </div>
     <!-- Login and Signup section -->
     <!-- Right Side Of Navbar -->

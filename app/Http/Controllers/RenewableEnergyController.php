@@ -61,7 +61,7 @@ class RenewableEnergyController extends Controller
             $min = $type->market_price - $percent_price;
             $max = $type->market_price + $percent_price;
             if ($valid['price'] < $min || $valid['price'] > $max) {
-                throw ValidationException::withMessages(['price' => 'Price should be between $'. $min . ' to $' . $max]);
+                throw ValidationException::withMessages(['price' => 'Price must be in $'. $min . ' to $' . $max]);
             }
         }
 
@@ -117,7 +117,7 @@ class RenewableEnergyController extends Controller
         $min = $renewableEnergy->renewableEnergyType->market_price - $percent_price;
         $max = $renewableEnergy->renewableEnergyType->market_price + $percent_price;
         if ($valid['price'] < $min || $valid['price'] > $max) {
-            throw ValidationException::withMessages(['price' => 'Price should be between $'. $min . ' to $' . $max]);
+            throw ValidationException::withMessages(['price' => 'Price must be in $'. $min . ' to $' . $max]);
         }
 
         $renewableEnergy->update($valid);

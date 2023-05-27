@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('renewable_energy_id')->constrained('renewable_energies')->cascadeOnDelete();
+            $table->foreignId('renewable_energy_id')->constrained('renewable_energies');
             $table->decimal('volume', 8, 2);
             $table->decimal('price', 8, 2);
             $table->timestamps();

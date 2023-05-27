@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::view('/update-profile', 'dashboard.profile.form');
+    Route::view('/profile', 'dashboard.profile.form');
 });
 
 
