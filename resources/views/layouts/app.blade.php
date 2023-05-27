@@ -40,7 +40,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/trading') }}"><strong>Trading</strong></a>
             </li>
-            @if(auth()->check() && auth()->user()->user_type == 'seller' || auth()->user()->user_type == 'service_manager')
+            @if(auth()->check() && (auth()->user()->user_type == 'seller' || auth()->user()->user_type == 'service_manager'))
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/renewable-energies') }}"><strong>Sell Energy</strong></a>
             </li>
