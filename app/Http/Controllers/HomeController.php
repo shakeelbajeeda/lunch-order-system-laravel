@@ -31,6 +31,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'address' => ['required', 'string'],
             'zone' => ['required', 'string'],
+            'balance' => '',
         ]);
         if ($request->password) {
             $validated = $request->validate(['password' => ['min:5', 'max:10','regex:/[a-z]/', 'regex:/[A-Z]/', 'regex:/[0-9]/', 'regex:/[@$!%*#?&]/']]);
@@ -38,26 +39,7 @@ class HomeController extends Controller
         }
 
         auth()->user()->update($validated);
-        return redirect('/profile')->with(['message' => 'profile updated successfully']);
-    }
-
-
-    public function depositFund(Request $request)
-    {
-        $valid = $request->validate([
-            'card_number' => ['required', 'integer', Rule::in('4242424242424242')],
-            'expiry_month' => 'required|integer|between:1,12',
-            'cvv' => 'required|integer',
-            'amount' => 'required|numeric',
-        ]);
-
-        $valid['card_last4'] = substr($valid['card_number'], -4);
-        $valid['user_id'] = auth()->user()->id;
-
-        Transaction::create($valid);
-
-        auth()->user()->increment('balance', $valid['amount']);
-        return redirect('/profile')->with(['message' => 'Payment added successfully']);
+        return redirect()->back()->with(['message' => 'Your profile has been updated successfully']);
     }
 
     /**

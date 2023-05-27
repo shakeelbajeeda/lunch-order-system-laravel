@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                'password' => Hash::make('12345678'),
                'user_type' => 'service_manager',
                'address' => 'Hobart',
-               'zone' => 'Hobart A',
+               'zone' => 'A',
            ],
            [
                'id' => 2,
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                'password' => Hash::make('12345678'),
                'user_type' => 'seller',
                'address' => 'Hobart',
-               'zone' => 'Hobart A',
+               'zone' => 'A',
            ],
            [
                'id' => 3,
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                'password' => Hash::make('12345678'),
                'user_type' => 'buyer',
                'address' => 'Hobart',
-               'zone' => 'Hobart A',
+               'zone' => 'A',
            ],
         ],['id', 'email']);
     }

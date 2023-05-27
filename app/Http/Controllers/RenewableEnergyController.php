@@ -146,12 +146,9 @@ class RenewableEnergyController extends Controller
     public function getRenewableEnergies(Request $request)
     {
         $renewable_energies = RenewableEnergy::query()->where('volume', '>', 0)->with(['user', 'renewableEnergyType']);
-        $renewable_energies->when(isset($request->energy_type), function ($query) use ($request) {
-            return $query->whereRenewableEnergyTypeId($request->energy_type);
-        });
-        $renewable_energies->when(isset($request->zone), function ($query) use ($request) {
+        $renewable_energies->when(isset($request->search), function ($query) use ($request) {
             return $query->with(['user' => function($q) use ($request) {
-                $q->where('zone', 'LIKE', '%'. $request->zone . '%');
+                $q->where('zone', 'LIKE', '%'. $request->search . '%');
             }]);
         });
         $renewable_energies = $renewable_energies->get()->filter(fn($value) => !is_null($value->user) && !empty($value->user));

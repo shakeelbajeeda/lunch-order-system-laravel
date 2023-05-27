@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 @section('content')
     <style>
         .table-responsive1 {
@@ -17,26 +17,27 @@
     </style>
     <div class="container">
         <div class="py-3 text-center h2 text-success">
-            Trade History <br>
+            Trading History <br>
             @if(count($orders) > 0)
-            <a href="{{ route('export-history') }}" class="btn btn-outline-success mt-3"><i class="fa fa-file-export mr-2"></i>Export In Excel File</a>
+            <a href="{{ route('export-history') }}" class="btn btn-outline-success mt-3"><i class="fa fa-file-export mr-2"></i>Export Trading History</a>
             @endif
         </div>
-        <div class="table-responsive bg-success">
-            <table id="dtHorizontalExample" class="table text-white table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Buyer Name</th>
-                    <th>Seller Name</th>
+                    <th>Buyer</th>
+                    <th>Seller</th>
                     <th>Energy Type</th>
                     <th>Zone</th>
                     <th>Volume</th>
-                    <th>Price</th>
-                    <th>Trade Date</th>
+                    <th>Amount</th>
+                    <th>Order Date</th>
                 </tr>
                 </thead>
                 <tbody>
+                @if(count($orders) > 0)
                 @foreach($orders as $key => $order)
                     <tr>
                         <td class="align-middle text-capitalize">{{ $key + 1 }}</td>
@@ -49,6 +50,11 @@
                         <td class="align-middle">{{ date('d M, Y', strtotime($order->created_at)) }}</td>
                     </tr>
                 @endforeach
+                @else
+                    <tr>
+                        <td colspan="8" class="text-center py-3 fs-5">No History Found</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>

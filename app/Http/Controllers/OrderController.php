@@ -46,7 +46,7 @@ class OrderController extends Controller
         $renewable_energy = RenewableEnergy::whereId($request->renewable_energy_id)->with(['renewableEnergyType', 'user'])->first();
 
         if (auth()->user()->user_type == 'seller') {
-            return redirect('/trading')->with(['error' => "Sorry you are not a buyer!"]);
+            return redirect('/trading')->with(['error' => "Sorry you are seller!"]);
         }
 
         if (!auth()->user()->is_active) {
@@ -84,7 +84,7 @@ class OrderController extends Controller
                 // add administration fee to service manager account
                 User::whereUserType('service_manager')->increment('balance', $renewable_energy->renewableEnergyType->administration_fee);
 
-                return redirect('/trading')->with(['message' => 'Energy Buy successfully']);
+                return redirect('/trading')->with(['message' => 'Energy purchased successfully']);
             }
         }
 

@@ -14,14 +14,14 @@
 <div class="table-responsive">
     <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
-        <tr>en
-            <th>Buyer Name</th>
-            <th>Seller Name</th>
+        <tr>
+            <th>Buyer</th>
+            <th>Seller</th>
             <th>Energy Type</th>
             <th>Zone</th>
             <th>Volume</th>
-            <th>Price</th>
-            <th>Trade Date</th>
+            <th>Amount</th>
+            <th>Order Date</th>
         </tr>
         </thead>
         <tbody>

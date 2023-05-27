@@ -25,7 +25,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(\App\Http\Controllers\HomeController::class)->group(function () {
         Route::put('update-profile', 'updateProfile')->name('update-profile');
-        Route::post('/deposit', 'depositFund')->name('deposit');
         Route::get('/trading-history', 'tradingHistory')->name('trading-history');
         Route::get('export-history', 'export')->name('export-history');
         Route::get('/dashboard', 'getTradingGraphData');
@@ -33,9 +32,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::view('/update-profile', 'dashboard.profile.form');
-    Route::view('/deposit-fund', 'dashboard.profile.payment-form');
-    Route::view('/profile', 'dashboard.profile.profile');
-
 });
 
 
