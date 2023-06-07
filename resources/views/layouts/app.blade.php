@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="{{ asset('website/dashboard-vendor/chart.js/Chart.js') }}"></script>
+    <script src="{{ asset('website/dashboard-js/demo/chart-area-demo.js') }}"></script>
     <link rel="stylesheet" href="{{asset('website/CSS/style.css')}}">
 </head>
 <body>

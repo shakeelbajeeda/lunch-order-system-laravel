@@ -87,10 +87,18 @@
                                 prices_datasets[findIndex].data.push(h.price);
                             } else {
                                 let obj = {
-                                    label: h.type,
-                                    backgroundColor: '#4CAF50',
-                                    hoverBackgroundColor: '#4CAF50',
-                                    borderColor: '#4CAF50',
+                                    label: h.type ,
+                                    lineTension: 0.3,
+                                    backgroundColor: `rgba(78, 115, 223, 0.${index})`,
+                                    borderColor: "rgba(78, 115, 223, 1)",
+                                    pointRadius: 3,
+                                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverRadius: 3,
+                                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHitRadius: 10,
+                                    pointBorderWidth: 2,
                                     data: [],
                                 }
                                 obj.data.push(h.price)
@@ -98,10 +106,18 @@
                             }
                         } else {
                             let obj = {
-                                label: h.type,
-                                backgroundColor: '#4CAF50',
-                                hoverBackgroundColor: '#4CAF50',
-                                borderColor: '#4CAF50',
+                                label: h.type ,
+                                lineTension: 0.3,
+                                backgroundColor: "rgba(78, 115, 223, 0.05)",
+                                borderColor: "rgba(78, 115, 223, 1)",
+                                pointRadius: 3,
+                                pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                pointBorderColor: "rgba(78, 115, 223, 1)",
+                                pointHoverRadius: 3,
+                                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                pointHitRadius: 10,
+                                pointBorderWidth: 2,
                                 data: [],
                             }
                             obj.data.push(h.price)
@@ -114,15 +130,23 @@
 
         // Trading History Graph
         var ctx = document.getElementById("trading-history");
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
             data: {
                 labels: dates,
                 datasets: [{
-                    label: "Traded Amount",
-                    backgroundColor: "#4CAF50",
-                    hoverBackgroundColor: "#4CAF50",
-                    borderColor: "#4CAF50",
+                    label: "Earnings",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
                     data: earnings,
                 }],
             },
@@ -139,23 +163,22 @@
                 scales: {
                     xAxes: [{
                         time: {
-                            unit: 'month'
+                            unit: 'date'
                         },
                         gridLines: {
                             display: false,
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 6
-                        },
-                        maxBarThickness: 25,
+                            maxTicksLimit: 7
+                        }
                     }],
                     yAxes: [{
                         ticks: {
-                            maxTicksLimit: 8,
+                            maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return '$' + number_format(value);
                             }
                         },
@@ -172,34 +195,36 @@
                     display: false
                 },
                 tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
                     titleMarginBottom: 10,
                     titleFontColor: '#6e707e',
                     titleFontSize: 14,
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
                     borderColor: '#dddfeb',
                     borderWidth: 1,
                     xPadding: 15,
                     yPadding: 15,
                     displayColors: false,
+                    intersect: false,
+                    mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                         }
                     }
-                },
+                }
             }
         });
 
 
         // Trade Price Graph
         var ctx = document.getElementById("market-price-change");
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
             data: {
-                labels: dates,
+                labels: price_dates,
                 datasets: prices_datasets,
             },
             options: {
@@ -215,23 +240,22 @@
                 scales: {
                     xAxes: [{
                         time: {
-                            unit: 'month'
+                            unit: 'date'
                         },
                         gridLines: {
                             display: false,
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 6
-                        },
-                        maxBarThickness: 25,
+                            maxTicksLimit: 7
+                        }
                     }],
                     yAxes: [{
                         ticks: {
-                            maxTicksLimit: 8,
+                            maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
+                            callback: function (value, index, values) {
                                 return '$' + number_format(value);
                             }
                         },
@@ -248,24 +272,26 @@
                     display: false
                 },
                 tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
                     titleMarginBottom: 10,
                     titleFontColor: '#6e707e',
                     titleFontSize: 14,
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
                     borderColor: '#dddfeb',
                     borderWidth: 1,
                     xPadding: 15,
                     yPadding: 15,
                     displayColors: false,
+                    intersect: false,
+                    mode: 'index',
                     caretPadding: 10,
                     callbacks: {
-                        label: function(tooltipItem, chart) {
+                        label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                             return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                         }
                     }
-                },
+                }
             }
         });
     </script>
