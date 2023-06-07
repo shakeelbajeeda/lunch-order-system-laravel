@@ -2,20 +2,16 @@
 @section('content')
     <div class="container">
         @if(session('error'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ session('error') }}</strong>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> {{ session('error') }}.
             </div>
         @endif
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session('message') }}</strong>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Success!</strong> {{ session('message') }}.
+                </div>
         @endif
         <section class="p-3">
             <h1 class="h2  text-center text-dark pt-4">Trading Renewable Energies List</h1>
@@ -42,7 +38,7 @@
                             <td>{{ $item->user->zone }}</td>
                             <td class="fw-bold">${{ $item->price }}</td>
                             <td>
-                                <button onclick="getItem({{ $item }})" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                                <button onclick="getItem({{ $item }})" class="btn btn-dark w-100" data-bs-toggle="modal"
                                         data-bs-target="#buyModal">
                                     Buy
                                 </button></td>
@@ -59,7 +55,7 @@
          data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header bg-success text-white">
+                <div class="modal-header bg-dark text-white">
                     <h1 class="modal-title fs-5" id="buyModalLabel">Buy Energy</h1>
                 </div>
                 <form action="{{ route('order.store') }}" method="post">
@@ -74,8 +70,8 @@
                         </label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-success" id="submit-btn">Purchase <span id="payable-amount"></span></button>
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-dark" id="submit-btn">Buy <span id="payable-amount"></span></button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         @if(auth()->user()->user_type !== 'service_manager')
-        <div class="py-3 text-center h2 text-success">
-            Market Price List
+        <div class="py-3 text-center h2">
+            Market Price Information
         </div>
-        <div class="table-responsive table-success table-striped">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+        <div class="table-responsive" style="border-radius: 10px">
+            <table id="dtHorizontalExample" class="table table-striped table-dark table-sm" cellspacing="0"
                    width="100%">
                 <thead>
                 <tr>
@@ -30,26 +30,31 @@
         </div>
         @endif
 
-        <!-- Trading History Chart -->
-        <div class="card shadow my-4">
-            <div class="card-header py-3 bg-success">
-                <h6 class="m-0 font-weight-bold text-white">Traded Energy</h6>
-            </div>
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="trading-history"></canvas>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Trading History Chart -->
+                <div class="card shadow my-4">
+                    <div class="card-header py-3 bg-dark">
+                        <h6 class="m-0 font-weight-bold text-white text-center">Trade Graph</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="trading-history"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Trade Price Chart -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 bg-success">
-                <h6 class="m-0 font-weight-bold text-white">Market Prices</h6>
-            </div>
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="market-price-change"></canvas>
+            <div class="col-md-6">
+                <!-- Trade Price Chart -->
+                <div class="card shadow mt-4">
+                    <div class="card-header py-3 bg-dark">
+                        <h6 class="m-0 font-weight-bold text-center text-white">Market Price Graph</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="market-price-change"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

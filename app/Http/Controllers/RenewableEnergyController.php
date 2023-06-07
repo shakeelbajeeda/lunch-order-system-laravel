@@ -147,13 +147,13 @@ class RenewableEnergyController extends Controller
     public function getRenewableEnergies(Request $request)
     {
         $renewable_energies = RenewableEnergy::query()->where('volume', '>', 0)->with(['user', 'renewableEnergyType']);
-        $user_ids = User::where('zone', 'LIKE', '%'. $request->search . '%')->pluck('id');
-        $types_id = RenewableEnergyType::where('energy_type', 'LIKE', '%'. $request->search . '%')->pluck('id');
-        $renewable_energies->when(isset($request->search), function ($query) use ($request, $user_ids, $types_id) {
-            return $query->where(function($q) use ($request, $user_ids, $types_id) {
-                $q->whereIn('user_id', $user_ids);
-                $q->orWhereIn('renewable_energy_type_id', $types_id);
-            });
+        $renewable_energies->when(isset($request->energy), function ($query) use ($request) {
+            return $query->whereRenewableEnergyTypeId($request->energy);
+        });
+        $renewable_energies->when(isset($request->zone), function ($query) use ($request) {
+            return $query->with(['user' => function($q) use ($request) {
+                $q->where('zone', 'LIKE', '%'. $request->zone . '%');
+            }]);
         });
         $renewable_energies = $renewable_energies->get()->filter(fn($value) => !is_null($value->user) && !empty($value->user));
         return view('trading', compact('renewable_energies'));
