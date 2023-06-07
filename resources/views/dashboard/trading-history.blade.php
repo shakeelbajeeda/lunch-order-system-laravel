@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <style>
         .table-responsive1 {
@@ -16,14 +16,26 @@
         }
     </style>
     <div class="container">
-        <div class="py-3 text-center h2 text-success">
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> {{ session('error') }}.
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Success!</strong> {{ session('message') }}.
+            </div>
+        @endif
+        <div class="py-3 text-center h2">
             Trading History <br>
             @if(count($orders) > 0)
             <a href="{{ route('export-history') }}" class="btn btn-outline-success mt-3"><i class="fa fa-file-export mr-2"></i>Export Trading History</a>
             @endif
         </div>
         <div class="table-responsive">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-secondary table-hover table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -59,22 +71,4 @@
             </table>
         </div>
     </div><br>
-@endsection
-@section('scripts')
-    <script>
-        @if (session()->has('message'))
-        Swal.fire(
-            'Good job!',
-            '{{ session()->get('message') }}',
-            'success'
-        )
-        @endif
-        @if (session()->has('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `{{ session()->get('error') }}`,
-        })
-        @endif
-    </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <style>
         .table-responsive1 {
@@ -17,29 +17,25 @@
     </style>
     <div class="container">
         @if(session('error'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ session('error') }}</strong>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> {{ session('error') }}.
             </div>
         @endif
         @if(session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session('message') }}</strong>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Success!</strong> {{ session('message') }}.
             </div>
         @endif
-        <div class="py-3 text-center h2 text-success">
+        <div class="py-3 text-center h2">
             Sell Renewable Energies
         </div>
         <div class="pt-3 pb-5 text-center">
-            <a href="{{ route('renewable-energies.create') }}" class="btn btn-outline-success">+ Sell Energy</a>
+            <a href="{{ route('renewable-energies.create') }}" class="btn btn-dark">+ Sell Energy</a>
         </div>
         <div class="table-responsive rounded">
-            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <table id="dtHorizontalExample" class="table table-secondary table-hover table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -57,12 +53,12 @@
                         <td class="align-middle">{{ round($item->volume) }} KWH</td>
                         <td class="align-middle">${{ $item->price }}</td>
                         <td class="align-middle d-flex">
-                            <a class="ml-3 btn btn-outline-info"
+                            <a class="ml-3 btn btn-info"
                                href="{{ route('renewable-energies.edit', $item->id) }}">Edit</a>
                             <form id="delete-form" action="{{ route('renewable-energies.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-outline-danger ml-3">Delete</button>
+                                <button type="submit" class="btn btn-danger ml-3">Delete</button>
                             </form>
                         </td>
                     </tr>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <div class="container" style="padding-bottom: 250px;">
         @if(session('error'))
@@ -17,14 +17,14 @@
                 </button>
             </div>
         @endif
-        <div class="h1  text-success text-center">{{ @$user ? 'Edit' : 'Add New' }} User</div>
-        <form method="post" action="{{ @$user ? route('users.update', @$user->id): route('users.store') }}" class="my-2" >
+        <div class="h1 text-center">{{ @$user ? 'Edit' : 'Add New' }} User</div>
+        <form method="post" action="{{ @$user ? route('users.update', @$user->id): route('users.store') }}" >
             @csrf
             @if(@$user)
                 @method('put')
             @endif
             <div class="row justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="mt-4">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
@@ -102,8 +102,8 @@
                         @enderror
                     </div>
                     <div class="col-md-12 text-center mt-4">
-                        <a href="{{ route('users.index') }}" class="btn btn-outline-danger btn-block">Cancel</a>
-                        <button type="submit" class="px-5 btn btn-outline-success btn-block">
+                        <a href="{{ route('users.index') }}" class="px-5 btn btn-danger">Cancel</a>
+                        <button type="submit" class="px-5 btn btn-dark">
                             {{ @$user ? 'Update' : 'Submit' }}
                         </button>
                     </div>

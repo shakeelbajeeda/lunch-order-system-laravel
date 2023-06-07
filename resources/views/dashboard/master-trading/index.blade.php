@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <style>
         .table-responsive1 {
@@ -32,14 +32,14 @@
                 </button>
             </div>
         @endif
-        <div class="py-3 text-center h2 text-success">
+        <div class="py-3 text-center h2">
             Master Trading
         </div>
         <div class="pt-3 pb-5 text-center">
-            <a href="{{ route('renewable-energy-type.create') }}" class="btn btn-outline-success">+ Add New Energy Type</a>
+            <a href="{{ route('renewable-energy-type.create') }}" class="btn btn-dark">+ Add New Energy Type</a>
         </div>
         <div class="table-responsive rounded">
-            <table id="dtHorizontalExample" class="table table-bordered table-striped table-sm" cellspacing="0" width="100%">
+            <table id="dtHorizontalExample" class="table table-secondary table-hover table-bordered table-striped table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -59,12 +59,12 @@
                         <td class="align-middle">${{ $item->administration_fee }}</td>
                         <td class="align-middle">${{ $item->tax }}</td>
                         <td class="align-middle d-flex">
-                            <a class="ml-3 btn btn-outline-info"
+                            <a class="ml-3 btn btn-info"
                                href="{{ route('renewable-energy-type.edit', $item->id) }}">Edit</a>
                             <form id="delete-form" action="{{ route('renewable-energy-type.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-outline-danger ml-3">Delete</button>
+                                <button type="submit" class="btn btn-danger ml-3">Delete</button>
                             </form>
                         </td>
                     </tr>

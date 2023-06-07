@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <div class="container-fluid">
         @if(auth()->user()->user_type !== 'service_manager')
@@ -6,7 +6,7 @@
             Market Price Information
         </div>
         <div class="table-responsive" style="border-radius: 10px">
-            <table id="dtHorizontalExample" class="table table-striped table-dark table-sm" cellspacing="0"
+            <table id="dtHorizontalExample" class="table table-striped table-secondary table-hover table-sm" cellspacing="0"
                    width="100%">
                 <thead>
                 <tr>
@@ -31,10 +31,10 @@
         @endif
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <!-- Trading History Chart -->
                 <div class="card shadow my-4">
-                    <div class="card-header py-3 bg-dark">
+                    <div class="card-header py-3 bg-secondary">
                         <h6 class="m-0 font-weight-bold text-white text-center">Trade Graph</h6>
                     </div>
                     <div class="card-body">
@@ -44,10 +44,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <!-- Trade Price Chart -->
                 <div class="card shadow mt-4">
-                    <div class="card-header py-3 bg-dark">
+                    <div class="card-header py-3 bg-secondary">
                         <h6 class="m-0 font-weight-bold text-center text-white">Market Price Graph</h6>
                     </div>
                     <div class="card-body">

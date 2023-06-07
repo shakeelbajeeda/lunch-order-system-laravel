@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
 <div class="container" style="padding-bottom: 250px;">
-    <div class="h1 text-center text-success">{{ @$renewableEnergyType ? 'Edit' : 'Add' }} Energy Type</div>
+    <div class="h1 text-center">{{ @$renewableEnergyType ? 'Edit' : 'Add' }} Energy Type</div>
     <form method="post" action="{{ @$renewableEnergyType ? route('renewable-energy-type.update', @$renewableEnergyType->id): route('renewable-energy-type.store') }}" class="my-5" >
         @csrf
         @if(@$renewableEnergyType)
             @method('put')
         @endif
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="mt-4">
                     <label for="energy_type">Renewable Energy Type</label>
                     <input type="text" name="energy_type" class="form-control @error('energy_type') is-invalid @enderror"
@@ -50,10 +50,10 @@
                     @enderror
                 </div>
                 <div class="col-md-12 text-center mt-4">
-                    <a href="{{ route('renewable-energy-type.index') }}" class="btn btn-outline-danger btn-block">
+                    <a href="{{ route('renewable-energy-type.index') }}" class="btn btn-danger px-5">
                         Cancel
                     </a>
-                    <button type="submit" class="btn btn-outline-success btn-block">
+                    <button type="submit" class="btn btn-dark px-5">
                         {{ @$renewableEnergyType ? 'Update' : 'Submit' }}
                     </button>
                 </div>

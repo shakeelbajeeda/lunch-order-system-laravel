@@ -1,16 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
     <div class="container" style="padding-bottom: 250px;">
-        @if (session('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ session('message') }}</strong>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Error!</strong> {{ session('error') }}.
             </div>
         @endif
-        <div class="h1 text-center text-success">My Profile</div>
-        <form method="post" action="{{ route('update-profile') }}" class="my-5">
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Success!</strong> {{ session('message') }}.
+            </div>
+        @endif
+        <div class="h1 text-center">Update Profile</div>
+        <form method="post" action="{{ route('update-profile') }}" class="mt-2">
             @csrf
             @method('put')
             <div class="row justify-content-center">
@@ -90,12 +94,12 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="{{ url('/update-profile') }}" class="px-5 btn btn-outline-danger btn-block mt-4">
+                            <a href="{{ url('/update-profile') }}" class="px-5 btn btn-danger btn-block mt-4">
                                 Cancel
                             </a>
                         </div>
                         <div class="col-6">
-                            <button type="submit" class="px-5 btn btn-outline-success btn-block mt-4">
+                            <button type="submit" class="px-5 btn btn-dark btn-block mt-4">
                                 Update
                             </button>
                         </div>
@@ -104,22 +108,4 @@
             </div>
         </form>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        @if (session()->has('message'))
-        Swal.fire(
-            'Good job!',
-            '{{ session()->get('message') }}',
-            'success'
-        )
-        @endif
-        @if (session()->has('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: `{{ session()->get('error') }}`,
-        })
-        @endif
-    </script>
 @endsection
