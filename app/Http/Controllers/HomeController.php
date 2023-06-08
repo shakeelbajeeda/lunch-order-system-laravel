@@ -146,4 +146,19 @@ class HomeController extends Controller
     }
 
 
+    public function depositFund(Request $request)
+    {
+        $validated = $request->validate([
+            'amount' => 'required|integer',
+            'card_number' => 'required|integer|min:16',
+            'csv' => 'required|integer|min:3',
+            'month' => 'required|integer',
+            'year' => 'required|integer'
+        ]);
+
+        auth()->user()->increment('balance',$validated['amount']);
+        return redirect()->back()->with(['message' => 'payment deposit successfully']);
+    }
+
+
 }

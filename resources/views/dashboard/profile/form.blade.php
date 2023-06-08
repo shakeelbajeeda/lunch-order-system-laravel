@@ -55,10 +55,6 @@
                         @enderror
                     </div>
                     <div class="mt-4">
-                        <label class="" for="user_type">Balance</label>
-                        <input type="number" name="balance" value="{{ auth()->user()->balance }}" class="form-control">
-                    </div>
-                    <div class="mt-4">
                         <label class="" for="password">Password</label>
                         <input type="text" name="password" minlength="5" maxlength="10"
                                class="form-control @error('password') is-invalid @enderror" placeholder="Password">

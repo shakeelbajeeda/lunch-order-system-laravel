@@ -81,7 +81,7 @@
             <ul class="list-unstyled bg-secondary rounded">
                 <li class="nav-item active">
                     <a class="nav-link text-white text-white" href="{{ url('/dashboard') }}">
-                        <i class="fas fa-fw fa-balance-scale"></i>
+                        <i class="fas fa-fw fa-network-wired"></i>
                         <span>Dashboard</span></a>
                 </li>
                 <!-- Nav Item - Admin Dashboard -->
@@ -115,6 +115,13 @@
                             <i class="fas fa-fw fa-user"></i>
                             <span>My Profile</span></a>
                     </li>
+                    @if(auth()->user()->user_type == 'buyer')
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" href="{{ url('/account-balance') }}">
+                                    <i class="fas fa-fw fa-balance-scale-right"></i>
+                                    <span>Deposit Fund</span></a>
+                            </li>
+                        @endif
                 @endauth
             </ul>
         </div>

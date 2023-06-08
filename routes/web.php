@@ -28,10 +28,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/trading-history', 'tradingHistory')->name('trading-history');
         Route::get('export-history', 'export')->name('export-history');
         Route::get('/dashboard', 'getTradingGraphData');
-
+        Route::post('/deposit', 'depositFund')->name('deposit');
     });
 
     Route::view('/profile', 'dashboard.profile.form');
+    Route::view('/account-balance', 'dashboard.AccountBalance');
 });
 
 
