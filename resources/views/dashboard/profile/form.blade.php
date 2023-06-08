@@ -81,6 +81,7 @@
                                     hidden>{{ ucwords(str_replace('_', ' ', auth()->user()->zone)) ?? 'Select User Type' }}</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
+                            <option value="C">C</option>
                         </select>
                         @error('user_type')
                         <span class="invalid-feedback" role="alert" style="display: block !important">

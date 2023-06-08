@@ -31,7 +31,7 @@
         <div class="py-3 text-center h2">
             Trading History <br>
             @if(count($orders) > 0)
-            <a href="{{ route('export-history') }}" class="btn btn-outline-success mt-3"><i class="fa fa-file-export mr-2"></i>Export Trading History</a>
+            <a href="{{ route('export-history') }}" class="btn btn-dark mt-3"><i class="fa fa-file-export mr-2"></i>Export History</a>
             @endif
         </div>
         <div class="table-responsive">
