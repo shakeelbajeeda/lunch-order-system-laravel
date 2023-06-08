@@ -94,7 +94,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <a href="{{ url('/update-profile') }}" class="px-5 btn btn-danger btn-block mt-4">
+                            <a href="{{ url('/profile') }}" class="px-5 btn btn-danger btn-block mt-4">
                                 Cancel
                             </a>
                         </div>

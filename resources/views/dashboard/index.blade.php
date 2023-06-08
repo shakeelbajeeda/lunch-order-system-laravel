@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="container-fluid">
-        @if(auth()->user()->user_type !== 'service_manager')
+        @if(auth()->user()->user_type !== 'service_manager' || auth()->check())
         <div class="py-3 text-center h2">
             Market Price Information
         </div>

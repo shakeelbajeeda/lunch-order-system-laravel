@@ -35,28 +35,6 @@
                 <a class="nav-link" href="{{ url('/dashboard') }}"><strong>Dashboard</strong></a>
             </li>
             @endauth
-            @if(auth()->check() && (auth()->user()->user_type == 'seller' || auth()->user()->user_type == 'service_manager'))
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/renewable-energies') }}"><strong>Sell Energy</strong></a>
-            </li>
-            @endif
-            @if(auth()->check() && auth()->user()->user_type == 'service_manager')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/renewable-energy-type') }}"><strong>Master Trading</strong></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/users') }}"><strong>User Management</strong></a>
-            </li>
-            @endif
-            @auth
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/trading-history') }}"><strong>Trading History</strong></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/profile') }}"><strong>Profile</strong></a>
-            </li>
-            @endauth
         </ul>
     </div>
     <!-- Login and Signup section -->
