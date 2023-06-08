@@ -85,6 +85,8 @@ class OrderController extends Controller
                 User::whereUserType('service_manager')->increment('balance', $renewable_energy->renewableEnergyType->administration_fee);
 
                 return redirect('/trading')->with(['message' => 'Energy purchased successfully']);
+            } else {
+                return redirect('/trading')->with(['error' => "You cannot add volume more than available volume!"]);
             }
         }
 

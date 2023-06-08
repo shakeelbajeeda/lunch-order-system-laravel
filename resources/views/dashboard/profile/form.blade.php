@@ -75,7 +75,7 @@
                         @enderror
                     </div>
                     <div class="mt-4">
-                        <label class="" for="zone">User Type</label>
+                        <label class="" for="zone">Zone</label>
                         <select class="form-control @error('zone') is-invalid @enderror" name="zone">
                             <option value="{{ auth()->user()->zone }}" selected
                                     hidden>{{ ucwords(str_replace('_', ' ', auth()->user()->zone)) ?? 'Select User Type' }}</option>

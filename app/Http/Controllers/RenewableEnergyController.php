@@ -18,7 +18,7 @@ class RenewableEnergyController extends Controller
     public function index()
     {
         $renewable_energies = RenewableEnergy::with('renewableEnergyType')
-        ->when(auth()->user()->user_id == 'seller', function ($query) {
+        ->when(auth()->user()->user_type == 'seller', function ($query) {
             return $query->whereUserId(auth()->user()->id);
         })->get();
         return view('dashboard.renewable-energies.index', compact('renewable_energies'));
@@ -108,10 +108,7 @@ class RenewableEnergyController extends Controller
             'volume' => 'required|numeric',
             'price' => 'required|numeric',
         ],['renewable_energy_type_id' => 'The renewable energy type field required']);
-
-        if ($renewableEnergy->renewable_energy_type_id !== $request->renewable_energy_type_id  && RenewableEnergy::whereRenewableEnergyTypeId($request->renewable_energy_type_id)->whereUserId(auth()->user()->id)->exists()) {
-            throw ValidationException::withMessages(['renewable_energy_type_id' => 'The energy you have already added']);
-        }
+        
         $renewableEnergy->load('renewableEnergyType');
 
         $percent_price = $renewableEnergy->renewableEnergyType->market_price / 10;
