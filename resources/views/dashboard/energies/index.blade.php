@@ -17,33 +17,33 @@
     </style>
     <div class="container">
         <div class="py-3 text-center h2 text-success">
-            Renewable Energies
+            Renewable Energies List
         </div>
         <div class="pt-3 pb-5">
-            <a href="{{ route('renewable-energies.create') }}" class="btn btn-outline-success">+ Add New</a>
+            <a href="{{ route('energies.create') }}" class="btn btn-outline-success">+ Create New</a>
         </div>
-        <div class="table-responsive bg-success rounded">
-            <table id="dtHorizontalExample" class="table text-white table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <div class="table-responsive">
+            <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Energy Type</th>
-                    <th>Volume</th>
-                    <th>Price</th>
+                    <th>Energy Volume</th>
+                    <th>Energy Price</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($renewable_energies as $key => $item)
+                @foreach($energies as $key => $item)
                     <tr>
                         <td class="align-middle">{{ $key + 1 }}</td>
-                        <td class="align-middle text-capitalize">{{ $item->renewableEnergyType->energy_type }}</td>
-                        <td class="align-middle">{{ round($item->volume) }} KWH</td>
-                        <td class="align-middle">${{ $item->price }}</td>
+                        <td class="align-middle text-capitalize">{{ $item->all_energy_type->type }}</td>
+                        <td class="align-middle">{{ round($item->energy_volume) }} KWH</td>
+                        <td class="align-middle">${{ $item->energy_price }}</td>
                         <td class="align-middle d-flex">
                             <a class="ml-3 btn btn-outline-primary"
-                               href="{{ route('renewable-energies.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
-                            <form id="delete-form" action="{{ route('renewable-energies.destroy', $item->id) }}" method="post">
+                               href="{{ route('energies.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
+                            <form id="delete-form" action="{{ route('energies.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i></button>

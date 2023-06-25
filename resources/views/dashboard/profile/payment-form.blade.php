@@ -1,10 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="container-fluid">
-        <div class="row d-flex justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="mx-auto">
-                    <h2 class="heading text-center text-success">Add Payment to Account</h2>
+                    <h2 class="py-4">My Balance => {{ auth()->user()->account_balance }}</h2>
+                    <h2 class="text-center text-success">Add Balance</h2>
                     <div class="text-center">
                         <img src="https://img.icons8.com/color/48/000000/visa.png" width="64px" height="60px"/>
                     </div>
@@ -66,4 +67,22 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        @if (session()->has('message'))
+        Swal.fire(
+            'Good job!',
+            '{{ session()->get('message') }}',
+            'success'
+        )
+        @endif
+        @if (session()->has('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `{{ session()->get('error') }}`,
+        })
+        @endif
+    </script>
 @endsection

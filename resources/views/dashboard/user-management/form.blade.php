@@ -10,10 +10,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mt-4">
-                        <label for="name" class="text-success">Name</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                               value="{{ @$user ? @$user->name : old('name') }}" placeholder="Name">
-                        @error('name')
+                        <label for="user_name" class="text-success">Name</label>
+                        <input type="text" name="user_name" class="form-control @error('user_name') is-invalid @enderror"
+                               value="{{ @$user ? @$user->user_name : old('user_name') }}" placeholder="Name">
+                        @error('user_name')
                         <span class="invalid-feedback" role="alert" style="display: block !important">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -30,27 +30,27 @@
                         @enderror
                     </div>
                     <div class="mt-4">
-                        <label for="user_type" class="text-success">User Type</label>
-                        <select class="form-control @error('user_type') is-invalid @enderror" name="user_type">
-                            <option value="{{ @$user ? @$user->user_type : old('user_type') }}" selected hidden>{{ @$user ? @$user->user_type : 'Select User Type' }}</option>
+                        <label for="role" class="text-success">User Type</label>
+                        <select class="form-control @error('role') is-invalid @enderror" name="role">
+                            <option value="{{ @$user ? @$user->role : old('role') }}" selected hidden>{{ @$user ? @$user->role : 'Select User Type' }}</option>
                             <option value="seller">Seller</option>
                             <option value="buyer">Buyer</option>
                             <option value="service_manager">Service Manager</option>
                         </select>
-                        @error('user_type')
+                        @error('role')
                         <span class="invalid-feedback" role="alert" style="display: block !important">
                      <strong>{{ $message }}</strong>
                      </span>
                         @enderror
                     </div>
                     <div class="mt-4">
-                        <label for="is_active" class="text-success">Status</label>
-                        <select class="form-control @error('is_active') is-invalid @enderror" name="is_active">
-                            <option value="{{ @$user->is_active }}" selected hidden>{{ @$user ? @$user->is_active ? 'Activated' : 'Inactivated' : 'Select Status' }}</option>
+                        <label for="status" class="text-success">Status</label>
+                        <select class="form-control @error('status') is-invalid @enderror" name="status">
+                            <option value="{{ @$user->status }}" selected hidden>{{ @$user ? @$user->status ? 'Activated' : 'Inactivated' : 'Select Status' }}</option>
                             <option value="1">Activated</option>
                             <option value="0">Inactivated</option>
                         </select>
-                        @error('is_active')
+                        @error('status')
                         <span class="invalid-feedback" role="alert" style="display: block !important">
                      <strong>{{ $message }}</strong>
                      </span>

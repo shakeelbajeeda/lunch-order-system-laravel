@@ -3,30 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TradingHistoryExport;
-use App\Models\MarketPrice;
-use App\Models\Order;
-use App\Models\RenewableEnergyType;
-use App\Models\Transaction;
+use App\Models\MarketInformation;
+use App\Models\EnergyOrder;
+use App\Models\AllEnergyType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
-class HomeController extends Controller
+class MainController extends Controller
 {
-    /**
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         return view('home');
     }
 
-    public function updateProfile(Request $request)
+
+    /**
+     * Update user profile
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function userProfileUpdate(Request $request)
     {
         $validated = $request->validate([
             'address' => ['required', 'string'],
@@ -42,7 +47,13 @@ class HomeController extends Controller
     }
 
 
-    public function depositFund(Request $request)
+    /**
+     * Add Balance
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addBalance(Request $request)
     {
         $valid = $request->validate([
             'card_number' => ['required', 'integer', Rule::in('4242424242424242')],
@@ -51,34 +62,29 @@ class HomeController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        $valid['card_last4'] = substr($valid['card_number'], -4);
-        $valid['user_id'] = auth()->user()->id;
-
-        Transaction::create($valid);
-
-        auth()->user()->increment('balance', $valid['amount']);
-        return redirect('/profile')->with(['message' => 'Payment added successfully']);
+        auth()->user()->increment('account_balance', $valid['amount']);
+        return redirect()->back()->with(['message' => 'Balance added successfully']);
     }
 
     /**
-     * Get trading history
+     * Fetch Trade Energy History
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function tradingHistory()
+    public function energyTradeHistory()
     {
-        $orders = Order::with([
-            'seller',
-            'buyer',
-            'renewableEnergy',
-            'renewableEnergy.renewableEnergyType',
-            'renewableEnergy.user'
+        $orders = EnergyOrder::with([
+            'energy_buyer',
+            'energy_seller',
+            'energy',
+            'energy.all_energy_type',
+            'energy.user'
         ])
-        ->when(auth()->user()->user_type == 'buyer', function ($query) {
-            return $query->whereBuyerId(auth()->user()->id);
+        ->when(auth()->user()->role == 'buyer', function ($query) {
+            return $query->whereBuyerUserId(auth()->user()->id);
         })
-        ->when(auth()->user()->user_type == 'seller', function ($query) {
-            return $query->whereSellerId(auth()->user()->id);
+        ->when(auth()->user()->role == 'seller', function ($query) {
+            return $query->whereSellerUserId(auth()->user()->id);
         })->get();
 
         return view('dashboard.trading-history', compact('orders'));
@@ -86,16 +92,22 @@ class HomeController extends Controller
 
 
     /**
-     * Export Trading History in Excel Form
+     * Excel Export of Traded Energy History
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function export()
+    public function exportEnergyTradeHistory()
     {
         return Excel::download(new TradingHistoryExport, 'trading-history.xlsx');
     }
 
-    private function  get_dates_arry($date) {
+    /**
+     * get week days
+     *
+     * @param $date
+     * @return array
+     */
+    private function  fetchDatesArray($date) {
         $dates = [];
         for($i=1; $i<=7; $i++) {
             $dates[] = Carbon::parse($date)->addDays($i);
@@ -104,20 +116,25 @@ class HomeController extends Controller
     }
 
 
-    public function getTradingGraphData()
+    /**
+     * Fetch Trade Energy History Graphs or Market Information Graphs
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function fetchTradeHistoryGraphs()
     {
         $date = Carbon::today()->subDays( 7 );
-        $dates_arr = $this->get_dates_arry($date);
+        $dates_arr = $this->fetchDatesArray($date);
         $data['weekly_statistics'] = [];
 
         foreach ($dates_arr as $key => $date) {
-            $price = Order::when(auth()->user()->user_type == 'buyer', function ($query) {
-                return $query->whereBuyerId(auth()->user()->id);
-            })->when(auth()->user()->user_type == 'seller', function ($query) {
-                return $query->whereSellerId(auth()->user()->id);
+            $price = EnergyOrder::when(auth()->user()->role == 'buyer', function ($query) {
+                return $query->whereBuyerUserId(auth()->user()->id);
+            })->when(auth()->user()->role == 'seller', function ($query) {
+                return $query->whereSellerUserId(auth()->user()->id);
             })
             ->whereRaw('date(created_at) <= date("' . $date . '")')
-                ->sum('price');
+                ->sum('total_price');
             $array = array(
                 'date' => date('D', strtotime($date)),
                 'trading_price' => $price,
@@ -129,26 +146,26 @@ class HomeController extends Controller
 
         foreach ($dates_arr as $key => $date) {
             $c_prices = [];
-            $energy_types = MarketPrice::select('energy_type')->distinct()->get();
+            $energy_types = MarketInformation::select('type')->distinct()->get();
             $prices_by_dates = [];
             foreach ($energy_types as $type) {
-                $price = MarketPrice::
-                whereRaw('date(created_at) <= date("' . $date . '")')->where('energy_type', $type->energy_type)->latest()->first();
+                $price = MarketInformation::
+                whereRaw('date(created_at) <= date("' . $date . '")')->where('type', $type->type)->latest()->first();
                 if($price) {
                     array_push($c_prices,
                         [
-                            'price' => $price->market_price,
-                            'type' => $price->energy_type
+                            'price' => $price->price,
+                            'type' => $price->type
                         ]
                     );
                 } else {
                     array_push($c_prices,
                         [
                             'price' => 0,
-                            'type' => $type->energy_type
+                            'type' => $type->type
                         ]
                     );
-                    array_push($prices_by_dates, ['price' => 0, 'type' => $type->energy_type]);
+                    array_push($prices_by_dates, ['price' => 0, 'type' => $type->type]);
                 }
 
             }
@@ -158,8 +175,7 @@ class HomeController extends Controller
             );
             array_push($data['market_prices_graph_data'], $array);
         }
-//        dd($data);
-        $data['market_prices'] = RenewableEnergyType::all();
+        $data['market_prices'] = AllEnergyType::all();
         return view('dashboard.index')->with($data);
     }
 

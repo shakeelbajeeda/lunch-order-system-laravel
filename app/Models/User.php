@@ -19,14 +19,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_name',
         'email',
         'password',
         'address',
-        'user_type',
+        'role',
         'zone',
-        'is_active',
-        'balance',
+        'status',
+        'account_balance',
     ];
 
     /**
@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(EnergyOrder::class);
     }
 }

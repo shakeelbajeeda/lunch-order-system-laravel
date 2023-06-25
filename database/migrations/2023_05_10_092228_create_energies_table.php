@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('renewable_energy_types', function (Blueprint $table) {
+        Schema::create('energies', function (Blueprint $table) {
             $table->id();
-            $table->string('energy_type')->unique();
-            $table->decimal('market_price', 8,2);
-            $table->decimal('administration_fee', 8, 2);
-            $table->decimal('tax', 8, 2);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('all_energy_type_id')->constrained('all_energy_types')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->decimal('energy_volume', 8,2);
+            $table->decimal('energy_price', 8, 2);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('renewable_energy_types');
+        Schema::dropIfExists('energies');
     }
 };

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="container">
-        @if(auth()->user()->user_type !== 'service_manager')
+        @if(auth()->user()->role !== 'service_manager')
         <div class="py-3 text-center h2 text-success">
             Market Price List
         </div>
@@ -19,10 +19,10 @@
                 <tbody>
                 @foreach($market_prices as $item)
                     <tr>
-                        <td class="align-middle text-capitalize">{{ $item->energy_type }}</td>
-                        <td class="align-middle">${{ $item->market_price }}</td>
+                        <td class="align-middle text-capitalize">{{ $item->type }}</td>
+                        <td class="align-middle">${{ $item->price }}</td>
                         <td class="align-middle">${{ $item->administration_fee }}</td>
-                        <td class="align-middle">${{ $item->tax }}</td>
+                        <td class="align-middle">${{ $item->energy_tax }}</td>
                     </tr>
                 @endforeach
                 </tbody>

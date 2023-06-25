@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('user_name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('address');
-            $table->enum('user_type', ['seller', 'buyer', 'service_manager']);
+            $table->enum('role', ['service_manager', 'buyer', 'seller']);
             $table->string('zone');
-            $table->boolean('is_active')->default(1);
-            $table->decimal('balance', 8,2)->default(0);
+            $table->boolean('status')->default(1);
+            $table->decimal('account_balance', 8,2)->default(0);
             $table->timestamps();
         });
     }

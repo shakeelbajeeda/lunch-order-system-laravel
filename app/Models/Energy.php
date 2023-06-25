@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class RenewableEnergy extends Model
+class Energy extends Model
 {
     use HasFactory;
 
     protected $fillable = [
       'user_id',
-      'renewable_energy_type_id',
-      'volume',
-      'price',
+      'all_energy_type_id',
+      'energy_volume',
+      'energy_price',
     ];
 
 
@@ -23,9 +23,9 @@ class RenewableEnergy extends Model
      *
      * @return BelongsTo
      */
-    public function renewableEnergyType(): BelongsTo
+    public function all_energy_type(): BelongsTo
     {
-        return  $this->belongsTo(RenewableEnergyType::class);
+        return  $this->belongsTo(AllEnergyType::class);
     }
 
     /**

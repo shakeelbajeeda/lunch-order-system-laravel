@@ -16,8 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            EnergyTypeSeeder::class,
-            RenewableEnergySeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

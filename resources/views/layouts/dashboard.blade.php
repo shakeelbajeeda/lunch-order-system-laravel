@@ -33,9 +33,18 @@
     </style>
 </head>
 
-<body id="page-top">
-@include('dashboard.include.header')
-@yield('content')
+<body>
+@include('website.include.header')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            @include('dashboard.include.header')
+        </div>
+        <div class="col-md-9">
+            @yield('content')
+        </div>
+    </div>
+</div>
 @include('dashboard.include.footer')
 @yield('scripts')
 </body>

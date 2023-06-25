@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EnergyController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\MasterTradingController;
+use App\Http\Controllers\EnergyOrderController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,35 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\RenewableEnergyTypeController::class, 'getEnergyTypes']);
+Route::get('/', [MasterTradingController::class, 'fetchTypes']);
 
 Route::middleware('auth')->group(function () {
-    Route::resources([
-        'order' => \App\Http\Controllers\OrderController::class,
-        'renewable-energies' => \App\Http\Controllers\RenewableEnergyController::class,
-        'renewable-energy-type' => \App\Http\Controllers\RenewableEnergyTypeController::class,
-        'users' => \App\Http\Controllers\UserManagementController::class,
-    ]);
-
-    Route::controller(\App\Http\Controllers\HomeController::class)->group(function () {
-        Route::put('update-profile', 'updateProfile')->name('update-profile');
-        Route::post('/deposit', 'depositFund')->name('deposit');
-        Route::get('/trading-history', 'tradingHistory')->name('trading-history');
-        Route::get('export-history', 'export')->name('export-history');
-        Route::get('/dashboard', 'getTradingGraphData');
-
-    });
-
-    Route::view('/update-profile', 'dashboard.profile.form');
-    Route::view('/deposit-fund', 'dashboard.profile.payment-form');
-    Route::view('/profile', 'dashboard.profile.profile');
-
+    Route::resource('energy-order', EnergyOrderController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('energies', EnergyController::class);
+    Route::resource('all-energy-types', MasterTradingController::class);
+    Route::put('user/profile/update', [MainController::class, 'userProfileUpdate'])->name('user.profile.update');
+    Route::get('/energy/trade/history', [MainController::class, 'energyTradeHistory'])->name('energy.trade.history');
+    Route::get('/export/energy/trade/history', [MainController::class, 'exportEnergyTradeHistory'])->name('export.energy.trade.history');
+    Route::get('/dashboard', [MainController::class, 'fetchTradeHistoryGraphs'])->name('dashboard');
+    Route::post('/deposit', [MainController::class, 'addBalance'])->name('deposit');
+    Route::view('/account', 'dashboard.profile.payment-form');
+    Route::view('/profile', 'dashboard.profile.form');
 });
 
 
 
-Route::get('/trading', [\App\Http\Controllers\RenewableEnergyController::class, 'getRenewableEnergies'])->name('trading');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/view-trading', [\App\Http\Controllers\EnergyController::class, 'getRenewableEnergies'])->name('view.trading');
+Auth::Routes();

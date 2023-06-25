@@ -3,16 +3,24 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-10">
-            <div class="card bg-white shadow  p-4 rounded">
-                <h1 class="h4 text-success mb-5 text-center"> Search Renewable</h1>
-                    <form method="get" action="{{ route('trading') }}">
-                        <div class="row">
+                <button class="btn btn-success w-100" data-bs-toggle="modal"
+                        data-bs-target="#buyModal">Search Energy</button>
+            </div>
+        </div>
+        <div class="modal fade p-5" id="buyModal" aria-labelledby="buyModalLabel">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h1 class="modal-title fs-5" id="buyModalLabel">Search Energy</h1>
+                    </div>
+                    <form method="get" action="{{ route('view.trading') }}">
+                        <div class="row px-3">
                             <div class="mb-3 col-md-4">
                                 <label for="type" class="form-label">Renewable Type</label>
                                 <select name="energy_type" class="form-select" aria-label="Default select example">
                                     <option value="" selected>Select Energy Type</option>
                                     @foreach($energy_types as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->energy_type) }}</option>
+                                        <option value="{{ $item->id }}">{{ ucwords($item->type) }}</option>
                                     @endforeach
                                 </select>
                             </div>

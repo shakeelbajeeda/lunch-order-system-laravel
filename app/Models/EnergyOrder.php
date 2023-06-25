@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Order extends Model
+class EnergyOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-      'buyer_id',
-      'seller_id',
-      'renewable_energy_id',
-      'volume',
-      'price',
+      'buyer_user_id',
+      'seller_user_id',
+      'energy_id',
+      'purchased_volume',
+      'total_price',
     ];
 
     /**
@@ -23,9 +23,9 @@ class Order extends Model
      *
      * @return BelongsTo
      */
-    public function buyer(): BelongsTo
+    public function energy_buyer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'buyer_id');
+        return $this->belongsTo(User::class, 'buyer_user_id');
     }
 
 
@@ -34,9 +34,9 @@ class Order extends Model
      *
      * @return BelongsTo
      */
-    public function seller(): BelongsTo
+    public function energy_seller(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'seller_id');
+        return $this->belongsTo(User::class, 'seller_user_id');
     }
 
     /**
@@ -44,8 +44,8 @@ class Order extends Model
      *
      * @return BelongsTo
      */
-    public function renewableEnergy(): BelongsTo
+    public function energy(): BelongsTo
     {
-        return $this->belongsTo(RenewableEnergy::class);
+        return $this->belongsTo(Energy::class);
     }
 }

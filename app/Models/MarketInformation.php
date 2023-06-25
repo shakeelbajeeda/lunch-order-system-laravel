@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MarketPrice extends Model
+class MarketInformation extends Model
 {
     use HasFactory;
 
+    protected $table = 'market_informations';
     protected $fillable = [
-        'energy_type',
-        'market_price',
+        'type',
+        'price',
         'administration_fee',
-        'tax',
+        'energy_tax',
     ];
 }

@@ -10,9 +10,9 @@
                         <h1 class="h3 my-3 text-success text-center">Register Account</h1>
                  <div class="row">
                      <div class="mt-3 col-md-6">
-                         <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Name" name="name" required>
-                         @error('name')
+                         <input type="text" class="form-control @error('user_name') is-invalid @enderror"
+                                placeholder="Name" name="user_name" required>
+                         @error('user_name')
                          <span class="invalid-feedback">
                               <strong>{{ $message }}</strong>
                             </span>
@@ -47,13 +47,13 @@
                                 minlength="5" maxlength="10">
                      </div>
                      <div class="mt-3 col-md-6">
-                         <select class="form-select @error('user_type') is-invalid @enderror" name="user_type"
+                         <select class="form-select @error('role') is-invalid @enderror" name="role"
                                  aria-label="Default select example" required>
                              <option selected hidden value="">Select User Type</option>
                              <option value="seller">Seller</option>
                              <option value="buyer">Buyer</option>
                          </select>
-                         @error('user_type')
+                         @error('role')
                          <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </span>
